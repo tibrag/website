@@ -1,0 +1,62 @@
+<header class="header">
+  {{- $image_name := "lelievlet.svg" }}
+
+  {{- $page := .page }}
+  {{- $menuID := .menuID }}
+  {{- $image := resources.GetMatch (printf "%s%s" "**/" $image_name) }}
+  {{- $home := $page.Site.BaseURL }}
+
+  {{- with index site.Menus $menuID }}
+    <nav class="nav">
+      <a class="screen-reader-text visually-hidden" href="#main">Direct naar inhoud</a>
+      <ul class="nav__menu">
+        <li class="nav__logo nav_item">
+          <a href="{{ $home }}"><img 
+            {{ with $image }}src="{{ $image.RelPermalink }}"{{ end }} alt="Start"></a>
+        </li>
+        {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+      </ul>
+    </nav>
+  {{- end }}
+  
+  {{- define "partials/inline/menu/walk.html" }}
+    {{- $page := .page }}
+    {{- range .menuEntries }}
+      {{- $attrs := dict "href" .URL }}
+      {{- if $page.IsMenuCurrent .Menu . }}
+        {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+      {{- else if $page.HasMenuCurrent .Menu .}}
+        {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+      {{- end }}
+      {{- $name := .Name }}
+      {{- with .Identifier }}
+        {{- with T . }}
+          {{- $name = . }}
+        {{- end }}
+      {{- end }}
+      {{ if .HasChildren }}
+        <li class="nav__dropdown nav_item">
+          <a tabindex="0">{{ $name }}</a>
+          {{- with .Children }}
+            <div class="nav__submenu">
+              <ul class="">
+                {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+              </ul>
+            </div>
+          {{- end }}
+        </li>
+      {{ else }}
+        <li class="nav__item">
+          <a
+            {{- range $k, $v := $attrs }}
+              {{- with $v }}
+                {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+              {{- end }}
+            {{- end -}}
+          >{{ $name }}</a>
+        </li>
+      {{ end }}
+    {{- end }}
+  {{- end }}  
+</header>
+

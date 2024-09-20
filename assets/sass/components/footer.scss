@@ -1,0 +1,6 @@
+@use '../util' as *;
+
+.footer {
+    grid-area: footer;
+    padding-inline: rem(40);
+}
