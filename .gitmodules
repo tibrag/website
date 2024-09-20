@@ -2,3 +2,4 @@
 	path = content
 	url = https://github.com/tibrag/content.git
 	fetchRecurseSubmodules = true
+	update = --init --force --remote
