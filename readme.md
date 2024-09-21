@@ -1,4 +1,6 @@
-## Webpaginas TODO:
+# Tibrag website
+
+## Webpaginas TODO
 
 - de_vereniging/tibrag (& scouting)
 - Lid worden (contributie)
@@ -7,7 +9,7 @@
 - Verhuur
 - Contact
 
-## Webpaginas ideeën:
+## Webpaginas ideeën
 
 ### Start
 
@@ -31,8 +33,8 @@
 
 ### Contact
 
-https://formspree.io (max 50 inzendingen per maand)
-https://un-static.com/how-to/add-hugo-contact-form/
+<https://formspree.io> (max 50 inzendingen per maand)
+<https://un-static.com/how-to/add-hugo-contact-form/>
 
 ## Workflow
 
