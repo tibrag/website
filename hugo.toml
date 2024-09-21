@@ -2,12 +2,16 @@ languageCode = 'nl-NL'
 title = 'Scouting Tibrag Sneek'
 
 [module]
-  [[module.imports]]
-    path = "github.com/tibrag/content"
+  [module.hugoVersion]
+    extended = true
+    min = '0.133.0'
 
+  [[module.imports]]
+    path = 'github.com/tibrag/content'
+    disable = false
     [[module.imports.mounts]]
-      source = "."
-      target = "content"
+      source = '.'
+      target = 'content'
 
 [params]
   robots_txt = true
