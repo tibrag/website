@@ -1,12 +1,12 @@
 ---
-name: Update Submodules on Change
+name: Update Submodules
 
 on:
   repository_dispatch:
     types: [update-content-submodule]
 
 jobs:
-  update-submodule:
+  update:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,7 +14,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          token: ${{ secrets.PAT_GITHUB }}
 
       - name: Print Git Configuration
         run: git config --list
