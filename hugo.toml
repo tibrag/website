@@ -2,12 +2,21 @@ languageCode = 'nl-NL'
 title = 'Scouting Tibrag Sneek'
 
 [module]
-  [[module.mounts]]
-    source = 'assets'
-    target = 'assets'
+  [[module.imports]]
+    path = "github.com/tibrag/content"
+
+    [[module.imports.mounts]]
+      source = "."
+      target = "content"
 
 [params]
   robots_txt = true
+
+[sitemap]
+  changeFreq = ''
+  disable = false
+  filename = 'sitemap.xml'
+  priority = -1
 
 [menus]
   [[menus.main]]
