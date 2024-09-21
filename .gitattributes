@@ -1,0 +1,12 @@
+# File: .gitattributes
+# Docs: https://git-scm.com/docs/gitattributes
+
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+*.{ps1,[pP][sS]1} text eol=crlf
+
+# SVG files should not be modified
+*.svg -text
