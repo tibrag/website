@@ -11,7 +11,7 @@ title = 'Scouting Tibrag Sneek'
     disabled = false
 
     [[module.imports.mounts]]
-      source = '.'
+      source = 'content'
       target = 'content'
 
 [params]
