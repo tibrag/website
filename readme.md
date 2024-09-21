@@ -1,4 +1,4 @@
-# Tibrag website
+# Tibrag site
 
 ## Webpaginas TODO
 
