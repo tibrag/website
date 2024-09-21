@@ -8,7 +8,8 @@ title = 'Scouting Tibrag Sneek'
 
   [[module.imports]]
     path = 'github.com/tibrag/content'
-    disable = false
+    disabled = false
+
     [[module.imports.mounts]]
       source = '.'
       target = 'content'
