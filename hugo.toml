@@ -4,7 +4,7 @@ title = 'Scouting Tibrag Sneek'
 [module]
   [module.hugoVersion]
     extended = true
-    min = '0.133.0'
+    min = '0.134.2'
 
   [[module.imports]]
     path = 'github.com/tibrag/content'
