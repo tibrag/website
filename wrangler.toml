@@ -2,4 +2,4 @@ name = "scouting-tibrag-sneek"
 pages_build_output_dir = "./public"
 
 [vars]
-HUGO_VERSION = "1.22.0"
+HUGO_VERSION = "0.134.2"
