@@ -42,24 +42,13 @@ jobs:
 
     - name: Create Pull Request
       id: create_pr
-      uses: peter-evans/create-pull-request@v4
-      with:
-        title: "Update Go dependencies"
-        body: "This PR updates the Go module dependencies."
-        head: update-go-modules-branch
-        base: main
-        token: ${{ secrets.PAT_GITHUB }}
-        
-    - name: Approve Pull Request
-      uses: peter-evans/approve-pull-request@v4
-      with:
-        pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
-        token: ${{ secrets.PAT_GITHUB }}
+      run: |
+        gh pr create --title "Update Go dependencies" --body "This PR updates the Go module dependencies." --head update-go-modules-branch --base main
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
 
-    - name: Merge Pull Request
-      uses: peter-evans/merge-pull-request@v4
-      with:
-        pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
-        merge-method: rebase
-        token: ${{ secrets.PAT_GITHUB }}
-        
+    - name: Enable Auto-Merge
+      run: |
+        gh pr merge --merge --auto "1" ${{ steps.create_pr.outputs.pull-request-number }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
