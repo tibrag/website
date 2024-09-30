@@ -28,7 +28,7 @@ jobs:
     
     - name: Commit changes
       run: |
-        git add go.mod go.sum
+        git add go.mod
         git commit -m "Update Go dependencies" || echo "No changes to commit"
 
     - name: Push changes
