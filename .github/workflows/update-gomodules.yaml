@@ -26,7 +26,8 @@ jobs:
         
     - name: Update go dependencies
       run: |
-        GONOPROXY=github.com/tibrag go get -d go get github.com/tibrag/content@latest
+        GONOPROXY=github.com/tibrag go get github.com/tibrag/content@latest
+    
     - name: Create new branch
       run: |
         git checkout -b update-go-modules-branch
