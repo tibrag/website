@@ -28,6 +28,9 @@ jobs:
       run: |
         go get -u ./...
         go mod tidy
+    - name: Create new branch
+      run: |
+        git checkout -b update-go-modules-branch
     
     - name: Commit changes
       run: |
@@ -35,6 +38,28 @@ jobs:
         git commit -m "Update Go dependencies" || echo "No changes to commit"
 
     - name: Push changes
-      run: git push --force-with-lease
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+      run: git push -u origin update-go-modules-branch
+
+    - name: Create Pull Request
+      id: create_pr
+      uses: peter-evans/create-pull-request@v4
+      with:
+        title: "Update Go dependencies"
+        body: "This PR updates the Go module dependencies."
+        head: update-go-modules-branch
+        base: main
+        token: ${{ secrets.PAT_GITHUB }}
+        
+    - name: Approve Pull Request
+      uses: peter-evans/approve-pull-request@v4
+      with:
+        pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
+        token: ${{ secrets.PAT_GITHUB }}
+
+    - name: Merge Pull Request
+      uses: peter-evans/merge-pull-request@v4
+      with:
+        pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
+        merge-method: rebase
+        token: ${{ secrets.PAT_GITHUB }}
+        
