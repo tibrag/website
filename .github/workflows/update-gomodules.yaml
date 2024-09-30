@@ -6,11 +6,7 @@ on:
 
 jobs:
   update-submodule:
-    name: Build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go: ['stable','oldstable']
     
     steps:
     - name: Check out code
@@ -24,7 +20,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
-        go-version: ${{ matrix.go }}
+        go-version: 'stable'
         check-latest: true
         
     - name: Update dependencies
