@@ -27,7 +27,6 @@ jobs:
     - name: Update go dependencies
       run: |
         go get github.com/tibrag/content@main
-        go mod tidy
     - name: Create new branch
       run: |
         git checkout -b update-go-modules-branch
