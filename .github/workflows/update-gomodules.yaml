@@ -26,7 +26,7 @@ jobs:
         
     - name: Update go dependencies
       run: |
-        go get -u ./...
+        go get github.com/tibrag/content@main
         go mod tidy
     - name: Create new branch
       run: |
@@ -43,6 +43,6 @@ jobs:
     - name: Create and Merge Pull Request
       run: |
         gh pr create --title "Update Go dependencies" --body "This PR updates the Go module dependencies." --head update-go-modules-branch --base main
-        gh pr merge --merge --auto "1" --delete-branch
+        gh pr merge --rebase --auto --delete-branch
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
