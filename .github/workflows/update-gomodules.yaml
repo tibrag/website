@@ -21,7 +21,15 @@ jobs:
         go-version: 'stable'
         check-latest: true
         
-    - name: Update dependencies
+    - name: Update go dependencies
       run: |
         go get -u ./...
         go mod tidy
+    
+    - name: Commit changes
+      run: |
+        git add go.mod go.sum
+        git commit -m "Update Go dependencies" || echo "No changes to commit"
+
+    - name: Push changes
+      run: git push origin main
