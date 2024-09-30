@@ -43,12 +43,13 @@ jobs:
     - name: Create Pull Request
       id: create_pr
       run: |
-        gh pr create --title "Update Go dependencies" --body "This PR updates the Go module dependencies." --head update-go-modules-branch --base main
+        PR_NUMBER=$(gh pr create --title "Update Go dependencies" --body "This PR updates the Go module dependencies." --head update-go-modules-branch --base main --json number -q .number)
+        echo "pr_number=$PR_NUMBER" >> $GITHUB_ENV
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
 
     - name: Enable Auto-Merge
       run: |
-        gh pr merge --merge --auto "1" --delete-branch ${{ steps.create_pr.outputs.pull-request-number }}
+        gh pr merge --merge --auto "1" --delete-branch ${{ env.pr_number }}
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
