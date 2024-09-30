@@ -16,5 +16,6 @@ jobs:
 
     - name: Update submodule
       run: |
-        go get -u
+        go list -m -u all
+        go get -u ../..
         go mod tidy
