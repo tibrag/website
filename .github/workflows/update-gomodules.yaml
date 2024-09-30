@@ -6,8 +6,16 @@ on:
 
 jobs:
   update-submodule:
+    name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: true
+      matrix:
+        go: ['stable','oldstable']
+    
     steps:
+    - name: Check out code
     - uses: actions/checkout@v4
     
     - name: Configure Git Identity
@@ -16,12 +24,12 @@ jobs:
         git config --global user.email "actions@github.com"
         
     - name: Set up Go
-      uses: ./
+      uses: actions/setup-go@v4
       with:
         go-version: ${{ matrix.go }}
         check-latest: true
         
-    - name: Update submodule
+    - name: Update dependencies
       run: |
-        go get -u
+        go get -u ./...
         go mod tidy
