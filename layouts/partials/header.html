@@ -11,6 +11,8 @@
 	<!-- voeg styles toe (css) -->
 	<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
 
+	<!-- voeg favicon toe (tabblad icoontje) -->
+	<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16">
 
 	<!-- SCSS (aka sass) object oriented css -->
 	{{ $opts := dict "transpiler" "dartsass" "targetPath" "css/style.css" }}
@@ -57,5 +59,7 @@
 <body class="body">
 
 {{ partial "nav.html" (dict "menuID" "main" "page" .) }}
+
+<div class="banner"></div>
 
 <main id="main" class="content">

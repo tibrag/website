@@ -6,23 +6,34 @@
 
 // navigatie (achtergrond) element
 .nav {
-    position: fixed;
-    background: var(--background);
+    top: 0;
     width: 100%;
+    min-height: rem(80);
+    background: var(--background);
     text-align: left;
     line-height: 30px;
-    padding: 0 rem(40) 0 rem(40);
-    height: rem(80);
+
+    @include breakpoint(medium) {
+        padding: 0 rem(40) 0 rem(40);
+    }
 
     // scouting logo container
     &__logo {
+        display: block;
+        max-height: rem(80);
+        width: fit-content;
+        z-index: 1000;
+
+        @include breakpoint(medium) {
+            position: absolute;
+        }
+
         // scouting logo afbeelding
         img {
             top: rem(-0);
-            position: absolute;
             max-width: inherit;
             max-height: rem(80);
-            
+
             // verandering voor groter scherm:
             @include breakpoint(medium) {
                 max-height: rem(120);
@@ -33,53 +44,50 @@
     // main navigatie menu
     &__menu {
         display: grid;
-        height: 100%;
+        width: 100%;
+        min-height: rem(80);
+        padding-left: rem(25);
         margin: auto;
         position: relative;
-        width: 100%;
-        grid-gap: rem(10);
+        grid-gap: rem(15);
         grid-template-columns: auto;
         grid-template-rows: repeat(5, auto);
         justify-content: stretch;
         list-style: none; // geen markers
-        padding: 0; // geen maker-padding
         align-items: center;
+        border-bottom: 1px solid var(--text-color2);
 
         // verandering voor groter scherm:
         @include breakpoint(medium) {
+            display: grid;
+            padding: 0; // geen maker-padding
             grid-template-rows: 1fr;
             grid-template-columns: auto 1fr repeat(4, max-content);
+            border-bottom: none;
 
-            // logo
+            // start menu rechterkant
             > :first-child {
-                justify-self: start;
-                grid-column: 1;
-            }
-
-            // eerste tekst item van de navigatie
-            > :nth-child(2) {
                 grid-column: 3;
-            }
-
-            > :nth-child(n+2) {
-                justify-self: end;
             }
         }
 
         // navigatie link (tekst)
         a {
-            padding-left: rem(10); //padding around submenu (top, right, bot, left)
-            font-size: 1em;
-            color: var(--light-bg);
             display: inline-block;
             width: 100%;
+            font-size: 1em;
+            color: var(--light-bg);
             color: var(--light-bg-accent);
+            cursor: pointer;
 
             // muis erop of tab target
-            &:hover, &:focus-visible {
+            &:hover,
+            &:focus-visible,
+            &:active {
                 color: var(--light-text-accent);
                 text-decoration: none;
             }
+
             @supports not selector(:focus-visible) {
                 &:focus {
                     color: var(--light-text-accent);
@@ -89,83 +97,66 @@
         }
     }
 
+    &__mobile-burger {
+        display: none;
+        opacity: 0;
+        top: 0;
+        right: 0;
+        padding: rem(20);
+        position: absolute;
+        font-size: rem(40);
+        font-weight: 900;
+    }
+
     // menu element met onderliggend menu
     &__dropdown {
         position: relative;
-        cursor: pointer;
-        // overflow: hidden;
+        //cursor: pointer;
     }
 
     // het onderliggende menu
     &__submenu {
+        display: block;
         background: var(--background);
+        padding-left: rem(25);
 
         //verandering voor groter scherm:
         @include breakpoint(medium) {
+            display: none; // anders knippert menu bij refresh
+            padding-top: rem(5);
+            left: rem(0);
+            padding-left: rem(0);
             position: absolute;
             z-index: 1000;
-            left: rem(0);
-            margin-top: rem(-3);
-            display: none; // anders knippert menu bij refresh
         }
-    }
-    // items in de navigatie (waar de tekst in zit)
-    &__item {
-        display: inline;
-    }
 
-    // de lijst in het submenu
-    &__submenu > ul {
-        display: grid;
-        grid-gap: 0;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        list-style: none;
-        max-width: rem(300);
-        min-width: rem(250);
-        text-wrap: nowrap;
-        padding: rem(15) rem(10) rem(0) rem(0); //padding around submenu (top, right, bot, left)
- 
-        // de linkjes in het submenu
-        > li {
-            a {
-                -webkit-transition: all 0.3s;
-                -moz-transition: all 0.3s;
-                -o-transition: all 0.3s;
-                transition: all 0.3s;
-                display: inline-block;
-                width: 100%;
-                padding-bottom: rem(10);
+        // de lijst in het submenu
+        ul {
+            display: grid;
+            // max-width: rem(300);
+            // min-width: rem(250);
+            padding-left: 0; //padding around submenu (top, right, bot, left)
+            grid-gap: rem(0);
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            align-content:center;
+            list-style: none;
+            text-wrap: nowrap;
+
+            // de linkjes in de lijst
+            li {
+                a {
+                    width: 100%;
+                    -webkit-transition: all 0.3s;
+                    -moz-transition: all 0.3s;
+                    -o-transition: all 0.3s;
+                    transition: all 0.3s;
+
+                    @include breakpoint(medium) {
+                        padding-block: rem(5);
+                    }
+                }
             }
         }
     }
-}
-
-// Screen reader text (voor slechtzienden)
-.screen-reader-text {
-    clip: rect(1px, 1px, 1px, 1px);
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-}
-
-// Screen reader (voor slechtzienden)
-.screen-reader-text:hover, .screen-reader-text:active, screen-reader-text:focus {
-    background-color: #c7c6c6;
-    border-radius: 3px;
-    box-shadow: 0 0 2px 2px rgba(0,0,0,0.6);
-    clip: auto !important;
-    color: #0a153f;
-    display: block;
-    font-size: 1em;
-    font-weight: bold;
-    height: auto;
-    left: 5px;
-    line-height: normal;
-    padding: 15px;
-    text-decoration: none;
-    top: 5px;
-    width: auto;
-    z-index: 100000;
 }

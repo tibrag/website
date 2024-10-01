@@ -53,10 +53,10 @@
         var cX, cY, pX, pY;
 
         // A private function for getting mouse position
-        var track = function(ev) {
+        var track = throttle(function(ev) {
             cX = ev.pageX;
             cY = ev.pageY;
-        };
+        },50);
 
         // A private function for comparing current and previous mouse position
         var compare = function(ev,ob) {
@@ -373,17 +373,49 @@
 
 })(jQuery);
 
+// Throttle function to limit how often initializeSuperfish is called
+function throttle(func, limit) {
+	var lastFunc;
+	var lastRan;
+	return function() {
+		var context = this;
+		var args = arguments;
+		if (!lastRan) {
+			func.apply(context, args);
+			lastRan = Date.now();
+		} else {
+			clearTimeout(lastFunc);
+			lastFunc = setTimeout(function() {
+				if ((Date.now() - lastRan) >= limit) {
+					func.apply(context, args);
+					lastRan = Date.now();
+				}
+			}, limit - (Date.now() - lastRan));
+		}
+	};
+}
+
 /*
  * Custom Superfish settings
  */
-if (jQuery('div.nav__submenu').css('position') == 'absolute') {
-    jQuery(document).ready(function() {
-        jQuery('ul.nav__menu').superfish({
-            popUpSelector: 'div.nav__submenu',
-            delay: 400,
-            speed: 'fast',
-            dropShadows: false,
-            cssArrows: false
-        });
-    });
+function initialize() {
+	if (jQuery('div.nav__submenu').css('position') == 'absolute') {
+		jQuery(document).ready(function() {
+			jQuery('ul.nav__menu').superfish({
+				popUpSelector: 'div.nav__submenu',
+				delay: 400,
+				speed: 'fast',
+				dropShadows: false,
+				cssArrows: false
+			});
+		});
+	} else {
+		jQuery('ul.nav__menu').superfish('destroy');
+	}
 }
+
+// Attach the throttled initialize function to the resize event
+var throttledInitialize = throttle(initialize, 500);
+window.addEventListener('resize', throttledInitialize);
+
+initialize();

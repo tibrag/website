@@ -1,0 +1,6 @@
+@use '../util' as *;
+
+.banner {
+    min-height: rem(25);
+    grid-area: banner;
+}
