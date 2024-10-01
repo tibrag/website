@@ -1,5 +1,6 @@
 @use '../util' as *;
 
 .content {
+    padding-block: rem(5);
     grid-area: main;
 }

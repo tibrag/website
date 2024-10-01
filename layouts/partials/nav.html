@@ -9,11 +9,18 @@
   {{- with index site.Menus $menuID }}
     <nav class="nav">
       <a class="screen-reader-text visually-hidden" href="#main">Direct naar inhoud</a>
-      <ul class="nav__menu">
-        <li class="nav__logo nav_item">
-          <a href="{{ $home }}"><img 
-            {{ with $image }}src="{{ $image.RelPermalink }}"{{ end }} alt="Start"></a>
-        </li>
+
+      <li class="nav__logo nav_item noselect">
+        <a href="{{ $home }}"><img 
+          {{ with $image }}src="{{ $image.RelPermalink }}"{{ end }} alt="Start"></a>
+      </li>
+
+      <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+      <a href="javascript:void(0);" class="nav__mobile-burger noselect" onclick="mobileNavToggle('auto')">
+        <b>☰</b>
+      </a>
+
+      <ul class="nav__menu hidden"> <!-- nav__menu is bound to navhover.js -->
         {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
       </ul>
     </nav>
@@ -46,7 +53,7 @@
           {{- end }}
         </li>
       {{ else }}
-        <li class="nav__item">
+        <li class="nav__item nav__item__childless">
           <a
             {{- range $k, $v := $attrs }}
               {{- with $v }}
