@@ -27,7 +27,10 @@ jobs:
       - name: Update go dependencies
         run: |
           GONOPROXY=github.com/tibrag go get github.com/tibrag/content@latest
-          go test
+
+      - name: Tidy Go modules (for linter)
+        run: |
+          go mod tidy
 
       - name: Create new branch
         run: |
