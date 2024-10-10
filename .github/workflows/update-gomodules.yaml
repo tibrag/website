@@ -28,9 +28,9 @@ jobs:
         run: |
           GONOPROXY=github.com/tibrag go get github.com/tibrag/content@latest
 
-      - name: Tidy Go modules (for linter)
+      - name: Make Super Linter happy
         run: |
-          go mod tidy
+          go get ./...
 
       - name: Create new branch
         run: |
