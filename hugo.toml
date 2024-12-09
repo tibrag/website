@@ -110,7 +110,13 @@ title = 'Scouting Tibrag Sneek'
     parent  = 'Meedoen'
     weight  = 43
 
+  
+  [[menus.main]]
+    name    = 'Verhuur'
+    pageRef = '/verhuur'
+    weight  = 50
+
   [[menus.main]]
     name    = 'Contact'
     pageRef = '/contact'
-    weight  = 50
+    weight  = 60
