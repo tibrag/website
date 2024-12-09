@@ -43,3 +43,5 @@ jobs:
           VALIDATE_CHECKOV: false
           VALIDATE_JSCPD: false
           VALIDATE_GO_MODULES: false
+          VALIDATE_SCSS: true
+          VALIDATE_CSS: false
