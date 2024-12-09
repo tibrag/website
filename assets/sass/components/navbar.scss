@@ -62,7 +62,7 @@
       display: grid;
       padding: 0; // geen maker-padding
       grid-template-rows: 1fr;
-      grid-template-columns: auto 1fr repeat(4, max-content);
+      grid-template-columns: auto 1fr repeat(5, max-content);
       border-bottom: none;
 
       // start menu rechterkant
