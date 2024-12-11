@@ -1,5 +1,5 @@
 <header class="header">
-  {{- $image_name := "lelievlet.svg" }}
+  {{- $image_name := "Lelievlet_TIBRAG.png" }}
 
   {{- $page := .page }}
   {{- $menuID := .menuID }}
@@ -9,10 +9,12 @@
   {{- with index site.Menus $menuID }}
     <nav class="nav">
       <a class="screen-reader-text visually-hidden" href="#main">Direct naar inhoud</a>
+      {{ partial "toggle.html" (dict "menuID" "main" "page" .) }}
 
       <li class="nav__logo nav_item noselect">
-        <a href="{{ $home }}"><img 
-          {{ with $image }}src="{{ $image.RelPermalink }}"{{ end }} alt="Start"></a>
+        <a href="{{ $home }}">
+          <img {{ with $image }}src="{{ $image.RelPermalink }}"{{ end }} alt="Start">
+        </a>
       </li>
 
       <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
@@ -22,10 +24,12 @@
 
       <ul class="nav__menu hidden"> <!-- nav__menu is bound to navhover.js -->
         {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+        <li class="nav__item nav__item__childless nav-darkmode-toggle">
+        </li>
       </ul>
     </nav>
   {{- end }}
-  
+
   {{- define "partials/inline/menu/walk.html" }}
     {{- $page := .page }}
     {{- range .menuEntries }}
@@ -54,16 +58,11 @@
         </li>
       {{ else }}
         <li class="nav__item nav__item__childless">
-          <a
-            {{- range $k, $v := $attrs }}
-              {{- with $v }}
-                {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-              {{- end }}
-            {{- end -}}
-          >{{ $name }}</a>
+          <a {{- range $k, $v := $attrs }} {{- with $v }} {{- printf " %s=%q" $k $v | safeHTMLAttr }} {{- end }} {{- end -}}>
+            {{ $name }}
+          </a>
         </li>
       {{ end }}
     {{- end }}
-  {{- end }}  
+  {{- end }}
 </header>
-
