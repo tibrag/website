@@ -1,5 +1,8 @@
 // defaults for html elements (html, body, *)
+@use "colors";
+
 html {
+    //color-scheme: dark light;;
     font-size: 100%;
     box-sizing: border-box;
     position: relative;
@@ -24,6 +27,11 @@ html {
     font-family: var(--font-inter);
     background: var(--background);
     color: var(--text-color);
+  }
+
+  html, body, header, nav, .nav__submenu {
+    transition:
+      background-color .4s;
   }
   
 //   for screen readers

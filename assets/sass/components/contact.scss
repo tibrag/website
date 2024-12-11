@@ -12,7 +12,7 @@
     grid-template-rows: repeat(5, auto);
     gap: rem(8);
     border-radius: rem(8);
-    background-color: var(--toggle);
+    background-color: var(--text-color);
     padding: rem(20);
     max-width: 52ch;
 
@@ -37,16 +37,17 @@
 
             button {
                 cursor: pointer;
-                background-color: var(--light-bg-accent);
+                background-color: var(--red);
                 color: var(--background);
                 padding: rem(10) rem(20);
                 border: solid rem(1) rgb(56, 0, 160);
                 border-radius: rem(8);
                 float: right;
                 width: max-content;
+                font-weight: bold;
             }
             button:hover {
-                background-color: var(--light-bg-accent2);
+                background-color: var(--blue);
             }
         }
         &__disclaimer {
@@ -78,6 +79,7 @@
 
 .maps {
     border-radius: rem(8);
+    width: 100%;
     max-width: 52ch;
-    height: calc(100% - rem(127));
+    height: rem(513);//calc(100% - rem(127));
 }

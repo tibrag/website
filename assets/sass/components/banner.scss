@@ -1,6 +1,10 @@
 @use '../util' as *;
 
 .banner {
-    min-height: rem(25);
+    max-height: rem(500);
+    height: calc(100vh - rem(400));
     grid-area: banner;
+    background-image: url("/images/Tibrag-onderweg.jpg");
+    background-size: cover;
+    background-position: 50% 75%;
 }
