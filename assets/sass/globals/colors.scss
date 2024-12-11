@@ -1,50 +1,48 @@
 :root {
-    --dark-background: hsl(130, 26.09%, 9.02%);
-    --light-background: hsl(0, 0%, 100%);
-    --dark-green: hsl(131.74, 29.11%, 30.98%);
-    --green: hsl(97.6, 32.47%, 45.29%);
-    --light-green: hsl(77.89, 51.35%, 56.47%);
-    --red: hsl(358.97, 46.61%, 50.78%);
-    --blue: hsl(160, 21.89%, 45.69%);
-    --orange: hsl(28.26, 87.57%, 65.29%);
-    --yellowish: hsl(50.27, 83.46%, 73.92%);
+  --dark-background: hsl(130, 26.09%, 9.02%);
+  --light-background: hsl(0, 0%, 100%);
+  --dark-green: hsl(131.74, 29.11%, 30.98%);
+  --green: hsl(97.6, 32.47%, 45.29%);
+  --light-green: hsl(77.89, 51.35%, 56.47%);
+  --red: hsl(358.97, 46.61%, 50.78%);
+  --blue: hsl(160, 21.89%, 45.69%);
+  --orange: hsl(28.26, 87.57%, 65.29%);
+  --yellowish: hsl(50.27, 83.46%, 73.92%);
 
-    // variable dark/light mode
-    --background: var(--light-background);
-    --text-color: var(--dark-background);
-    --accent-color: var(--green);
-    --dark-accent: var(--dark-green);
-    --light-accent: var(--light-green);
-    --link: var(--red);
-    --visited: var(--blue);
-  }
-  
-  // dark mode
-  :root:has(.switch__input:checked) {
-    --background: var(--dark-background);
-    --text-color: var(--light-background);
-    --accent-color: var(--green);
-    --dark-accent: var(--dark-green);
-    --light-accent: var(--light-green);
-    --link: var(--red);
-    --visited: var(--blue);
-  }
+  // variable dark/light mode
+  --background: var(--light-background);
+  --text-color: var(--dark-background);
+  --accent-color: var(--green);
+  --dark-accent: var(--dark-green);
+  --light-accent: var(--light-green);
+  --link: var(--red);
+  --visited: var(--blue);
+}
 
-  // @media (prefers-color-scheme: dark) {
-  //   :root {
-  //     --background: var(--dark-bg);
-  //     --text-color: var(--dark-text2);
-  //     --text-color2: var(--dark-text1);
-  //     --card-bg: var(--dark-card);
-  //     --card-hover: var(--dark-card-hover);
-  //     --toggle: var(--light-bg);
-  //     --toggle-bg: linear-gradient(
-  //       225deg,
-  //       var(--toggle-bg-end) 0%,
-  //       var(--toggle-bg-start) 98.02%
-  //     );
-  //     --toggle-button: var(--dark-bg);
-  //   }
-  // }
-  
-  
+// dark mode
+:root:has(.switch__input:checked) {
+  --background: var(--dark-background);
+  --text-color: var(--light-background);
+  --accent-color: var(--green);
+  --dark-accent: var(--dark-green);
+  --light-accent: var(--light-green);
+  --link: var(--red);
+  --visited: var(--blue);
+}
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --background: var(--dark-bg);
+//     --text-color: var(--dark-text2);
+//     --text-color2: var(--dark-text1);
+//     --card-bg: var(--dark-card);
+//     --card-hover: var(--dark-card-hover);
+//     --toggle: var(--light-bg);
+//     --toggle-bg: linear-gradient(
+//       225deg,
+//       var(--toggle-bg-end) 0%,
+//       var(--toggle-bg-start) 98.02%
+//     );
+//     --toggle-button: var(--dark-bg);
+//   }
+// }

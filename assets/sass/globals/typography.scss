@@ -1,4 +1,4 @@
-@use '../util' as *;
+@use "../util" as *;
 
 h1,
 h2,
@@ -28,7 +28,8 @@ a:active {
 
 a {
   color: var(--red);
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     color: var(--blue);
   }
 }

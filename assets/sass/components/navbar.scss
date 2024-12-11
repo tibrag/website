@@ -34,7 +34,7 @@
     // verandering voor groter scherm:
     @include breakpoint(medium) {
       a::after {
-        content: '';
+        content: "";
         position: absolute;
         top: rem(-55);
         left: rem(-25);
@@ -90,7 +90,7 @@
     border-bottom: 1px solid var(--text-color);
     padding-top: rem(80);
     z-index: 100;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
 
     // verandering voor groter scherm:
     @include breakpoint(medium) {
