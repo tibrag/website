@@ -12,8 +12,9 @@
       {{ partial "toggle.html" (dict "menuID" "main" "page" .) }}
 
       <li class="nav__logo nav_item noselect">
-        <a href="{{ $home }}"><img 
-          {{ with $image }}src="{{ $image.RelPermalink }}"{{ end }} alt="Start"></a>
+        <a href="{{ $home }}">
+          <img {{ with $image }}src="{{ $image.RelPermalink }}"{{ end }} alt="Start">
+        </a>
       </li>
 
       <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
@@ -57,13 +58,9 @@
         </li>
       {{ else }}
         <li class="nav__item nav__item__childless">
-          <a
-            {{- range $k, $v := $attrs }}
-              {{- with $v }}
-                {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-              {{- end }}
-            {{- end -}}
-          >{{ $name }}</a>
+          <a {{- range $k, $v := $attrs }} {{- with $v }} {{- printf " %s=%q" $k $v | safeHTMLAttr }} {{- end }} {{- end -}}>
+            {{ $name }}
+          </a>
         </li>
       {{ end }}
     {{- end }}
