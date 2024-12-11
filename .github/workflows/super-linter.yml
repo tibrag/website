@@ -45,3 +45,4 @@ jobs:
           VALIDATE_GO_MODULES: false
           VALIDATE_SCSS: true
           VALIDATE_CSS: false
+          HTML_PRETTIER: false # doesnt work with GoHugo html files
