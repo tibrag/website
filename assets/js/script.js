@@ -3,7 +3,7 @@ console.log('JS is loaded!')
 // Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu/bar icon
 function mobileNavToggle (how) {
   console.log('Burger toggle: ', how)
-  let x = document.getElementsByClassName('nav__menu')[0]
+  const x = document.getElementsByClassName('nav__menu')[0]
   switch (how) {
     case 'auto':
       x.classList.toggle('hidden')
@@ -52,8 +52,8 @@ function throttle (func, limit) {
   let lastFunc
   let lastRan
   return function () {
-    let context = this
-    let args = arguments
+    const context = this
+    const args = arguments
     if (!lastRan) {
       func.apply(context, args)
       lastRan = Date.now()
@@ -72,7 +72,7 @@ function throttle (func, limit) {
   }
 }
 
-let throttledBurgerState = throttle(burgerState, 100)
+const throttledBurgerState = throttle(burgerState, 100)
 window.addEventListener('resize', throttledBurgerState)
 
 // darkmode persistent on page change
