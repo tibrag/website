@@ -29,7 +29,6 @@ body {
   color: var(--text-color);
 }
 
-html,
 body,
 header,
 nav,
@@ -45,4 +44,8 @@ nav,
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+.no-transition {
+  transition: none !important;
 }

@@ -9,20 +9,20 @@
   --orange: hsl(28.26, 87.57%, 65.29%);
   --yellowish: hsl(50.27, 83.46%, 73.92%);
 
-  // variable dark/light mode
+  // dark mode
+  &:has(.switch__input:checked) {
+    --background: var(--dark-background);
+    --text-color: var(--light-background);
+    --accent-color: var(--green);
+    --dark-accent: var(--dark-green);
+    --light-accent: var(--light-green);
+    --link: var(--red);
+    --visited: var(--blue);
+  }
+
+  // light mode
   --background: var(--light-background);
   --text-color: var(--dark-background);
-  --accent-color: var(--green);
-  --dark-accent: var(--dark-green);
-  --light-accent: var(--light-green);
-  --link: var(--red);
-  --visited: var(--blue);
-}
-
-// dark mode
-:root:has(.switch__input:checked) {
-  --background: var(--dark-background);
-  --text-color: var(--light-background);
   --accent-color: var(--green);
   --dark-accent: var(--dark-green);
   --light-accent: var(--light-green);
