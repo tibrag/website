@@ -96,4 +96,5 @@ toggle.addEventListener('change', () => {
 // darkmode no transition before js loaded
 setTimeout(() => {
   document.body.classList.remove('no-transition')
-}, 150) // 150ms delay should be enough
+  document.getElementsByClassName('nav')[0].classList.remove('no-transition')
+}, 400) // 400ms delay should be more than enough
