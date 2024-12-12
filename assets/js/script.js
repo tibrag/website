@@ -76,3 +76,24 @@ function throttle(func, limit) {
 
 var throttledBurgerState = throttle(burgerState, 100)
 window.addEventListener('resize', throttledBurgerState);
+
+
+
+// darkmode persistent on page change
+const darkModeKey = "darkMode";
+const body = document.body;
+const toggle = document.getElementsByClassName('switch__input')[0];
+
+// On load: Apply mode based on localStorage
+if (localStorage.getItem(darkModeKey) === "enabled") {
+    toggle.checked = true;
+}
+
+// Update mode on toggle
+toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+        localStorage.setItem(darkModeKey, "enabled");
+    } else {
+        localStorage.setItem(darkModeKey, "disabled");
+    }
+});
