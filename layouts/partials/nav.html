@@ -9,7 +9,7 @@
   {{- $home := $page.Site.BaseURL }}
 
   {{- with index site.Menus $menuID }}
-    <nav class="nav">
+    <nav class="nav no-transition">
       <a class="screen-reader-text visually-hidden" href="#main">Direct naar inhoud</a>
       {{ partial "toggle.html" (dict "menuID" "main" "page" .) }}
 
