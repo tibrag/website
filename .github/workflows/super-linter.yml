@@ -1,48 +1,49 @@
 ---
-# File: .github/workflows/super-linter.yml
-# Docs: https://github.com/github/super-linter
-
-name: Super Linter
-
-on:
-  push:
-  pull_request:
-    branches:
-      - main
-
-permissions:
-  contents: read
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
-
-jobs:
-  build:
-    name: Lint Code Base
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-
-      - name: Lint Code Base
-        uses: github/super-linter/slim@v7
-        env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LINTER_RULES_PATH: "."
-          EDITORCONFIG_FILE_NAME: .editorconfig
-          VALIDATE_ALL_CODEBASE: false
-          VALIDATE_CHECKOV: false
-          VALIDATE_JSCPD: false
-          VALIDATE_GO_MODULES: false
-          VALIDATE_SCSS: true
-          VALIDATE_CSS: false
-          VALIDATE_HTML_PRETTIER: false # doesnt work with GoHugo html files
+  # File: .github/workflows/super-linter.yml
+  # Docs: https://github.com/github/super-linter
+  
+  name: Super Linter
+  
+  on:
+    push:
+    pull_request:
+      branches:
+        - main
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: false
+  
+  jobs:
+    build:
+      name: Lint Code Base
+      runs-on: ubuntu-latest
+      timeout-minutes: 30
+      defaults:
+        run:
+          shell: bash
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+            submodules: true
+  
+        - name: Lint Code Base
+          uses: github/super-linter/slim@v7
+          env:
+            DEFAULT_BRANCH: main
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            LINTER_RULES_PATH: "."
+            EDITORCONFIG_FILE_NAME: .editorconfig
+            VALIDATE_ALL_CODEBASE: false
+            VALIDATE_CHECKOV: false
+            VALIDATE_JSCPD: false
+            VALIDATE_GO_MODULES: false
+            VALIDATE_SCSS: true
+            VALIDATE_CSS: false
+            VALIDATE_HTML_PRETTIER: false # doesnt work with GoHugo html files
+            VALIDATE_JAVASCRIPT_PRETTIER: false # conflicts with VALIDATE_JAVASCRIPT_STANDARD
