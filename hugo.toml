@@ -19,8 +19,8 @@ title = 'Scouting Tibrag Sneek'
 
 [sitemap]
   changeFreq = ''
-  disable = false
-  filename = 'sitemap.xml'
+  disable = true
+  filename = 'sitemap-hugo.xml'
   priority = -1
 
 [menus]
