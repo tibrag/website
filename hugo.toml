@@ -26,24 +26,24 @@ title = 'Scouting Tibrag Sneek'
 [menus]
   [[menus.main]]
     name    = 'De vereniging'
-    pageRef = '/de_vereniging'
+    pageRef = '/vereniging'
     weight  = 10
 
   [[menus.main]]
     name    = 'Wat is scouting?'
-    pageRef = '/de_vereniging/scouting'
+    pageRef = '/vereniging/scouting'
     parent  = 'De vereniging'
     weight  = 11
 
   [[menus.main]]
     name    = 'Wat is TIBRAG?'
-    pageRef = '/de_vereniging/tibrag'
+    pageRef = '/vereniging/tibrag'
     parent  = 'De vereniging'
     weight  = 12
 
   [[menus.main]]
     name    = 'Speltakken'
-    pageRef = '/de_vereniging/speltakken'
+    pageRef = '/vereniging/speltakken'
     parent  = 'De vereniging'
     weight  = 13
 
@@ -59,14 +59,14 @@ title = 'Scouting Tibrag Sneek'
     weight  = 21
 
   [[menus.main]]
-    name    = 'Zeeverkenners'
-    pageRef = '/leden/zeeverkenners'
+    name    = 'Junior Scouts'
+    pageRef = '/leden/juniorscouts'
     parent  = 'Voor Leden'
     weight  = 22
 
   [[menus.main]]
-    name    = 'Wilde Vaart'
-    pageRef = '/leden/wilde vaart'
+    name    = 'Loodsen'
+    pageRef = '/leden/loodsen'
     parent  = 'Voor Leden'
     weight  = 23
 
@@ -94,13 +94,13 @@ title = 'Scouting Tibrag Sneek'
 
   [[menus.main]]
     name    = 'Lid Worden'
-    pageRef = '/meedoen/lid_worden'
+    pageRef = '/meedoen/lid'
     parent  = 'Meedoen'
     weight  = 41
 
   [[menus.main]]
     name    = 'Leiding Worden'
-    pageRef = '/meedoen/leiding_worden'
+    pageRef = '/meedoen/leiding'
     parent  = 'Meedoen'
     weight  = 42
 
