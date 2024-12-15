@@ -26,6 +26,18 @@
     <!-- als programmas een folder in content is, dan is de uitkomst -> Programmas | Scouting Tibrag Sneek <- in de titel tab -->
     <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
 
+    <!-- quick darkmode check -->
+    <script>
+      // darkmode persistent on page change
+      const darkModeKey = 'darkMode'
+      const toggle = document.getElementsByClassName('switch__input')[0]
+
+      // On load: Apply mode based on localStorage
+      if (localStorage.getItem(darkModeKey) === 'enabled') {
+        toggle.checked = true
+      }
+    </script>
+
     <!-- voeg styles toe (css) -->
     <link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
 
