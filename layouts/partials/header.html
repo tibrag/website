@@ -28,14 +28,8 @@
 
     <!-- quick darkmode check -->
     <script>
-      // darkmode persistent on page change
-      const darkModeKey = 'darkMode'
-      const toggle = document.getElementsByClassName('switch__input')[0]
-
-      // On load: Apply mode based on localStorage
-      if (localStorage.getItem(darkModeKey) === 'enabled') {
-        toggle.checked = true
-      }
+      const darkmode = localStorage.getItem('darkMode')
+      document.documentElement.dataset.appliedMode = darkmode
     </script>
 
     <!-- voeg styles toe (css) -->
