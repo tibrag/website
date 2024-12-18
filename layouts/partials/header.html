@@ -27,7 +27,7 @@
     <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
 
     <!-- quick darkmode check -->
-    <script>
+    <script data-cfasync="false">
       const darkmode = localStorage.getItem('darkMode')
       document.documentElement.dataset.darkmode = darkmode
     </script>
