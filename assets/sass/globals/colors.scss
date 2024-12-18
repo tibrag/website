@@ -10,6 +10,7 @@
   --yellowish: hsl(50.27, 83.46%, 73.92%);
 
   // dark mode
+  &[data-applied-mode="dark"],
   &:has(.switch__input:checked) {
     --background: var(--dark-background);
     --text-color: var(--light-background);
@@ -32,17 +33,12 @@
 
 // @media (prefers-color-scheme: dark) {
 //   :root {
-//     --background: var(--dark-bg);
-//     --text-color: var(--dark-text2);
-//     --text-color2: var(--dark-text1);
-//     --card-bg: var(--dark-card);
-//     --card-hover: var(--dark-card-hover);
-//     --toggle: var(--light-bg);
-//     --toggle-bg: linear-gradient(
-//       225deg,
-//       var(--toggle-bg-end) 0%,
-//       var(--toggle-bg-start) 98.02%
-//     );
-//     --toggle-button: var(--dark-bg);
+//     --background: var(--dark-background);
+//     --text-color: var(--light-background);
+//     --accent-color: var(--green);
+//     --dark-accent: var(--dark-green);
+//     --light-accent: var(--light-green);
+//     --link: var(--red);
+//     --visited: var(--blue);
 //   }
 // }
