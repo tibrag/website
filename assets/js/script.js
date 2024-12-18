@@ -88,8 +88,10 @@ if (localStorage.getItem(darkModeKey) === 'enabled') {
 toggle.addEventListener('change', () => {
   if (toggle.checked) {
     localStorage.setItem(darkModeKey, 'enabled')
+    document.documentElement.dataset.darkmode = 'enabled'
   } else {
     localStorage.setItem(darkModeKey, 'disabled')
+    document.documentElement.dataset.darkmode = 'disabled'
   }
 })
 
