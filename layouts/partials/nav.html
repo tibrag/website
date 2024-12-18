@@ -9,7 +9,7 @@
   {{- $home := $page.Site.BaseURL }}
 
   {{- with index site.Menus $menuID }}
-    <nav class="nav no-transition">
+    <menu class="nav no-transition">
       <a class="screen-reader-text visually-hidden" href="#main">Direct naar inhoud</a>
       {{ partial "toggle.html" (dict "menuID" "main" "page" .) }}
 
@@ -29,7 +29,7 @@
         <li class="nav__item nav__item__childless nav-darkmode-toggle">
         </li>
       </ul>
-    </nav>
+    </menu>
   {{- end }}
 
   {{- define "partials/inline/menu/walk.html" }}
