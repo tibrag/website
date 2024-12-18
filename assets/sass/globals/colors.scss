@@ -10,7 +10,7 @@
   --yellowish: hsl(50.27, 83.46%, 73.92%);
 
   // dark mode
-  &[data-applied-mode="dark"],
+  &[data-darkmode="enabled"],
   &:has(.switch__input:checked) {
     --background: var(--dark-background);
     --text-color: var(--light-background);
