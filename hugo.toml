@@ -1,6 +1,9 @@
 languageCode = 'nl-NL'
 title = 'Scouting Tibrag Sneek'
 
+[markup.goldmark.renderer]
+  unsafe = true
+
 [module]
   [module.hugoVersion]
     extended = true
