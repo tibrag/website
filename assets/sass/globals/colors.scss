@@ -1,6 +1,10 @@
 :root {
   --dark-background: hsl(130, 26.09%, 9.02%);
-  --light-background: hsl(0, 0%, 100%);
+  --light-background: hsl(130, 26.09%, 90.02%);
+  --accent-dark-background: hsl(140, 26.09%, 13.02%);
+  --accent-light-background: hsl(130, 26.09%, 100%);
+  --dark-shadow: hsl(0, 0%, 8.7%);
+  --light-shadow: hsl(0, 0%, 80%);
   --dark-green: hsl(131.74, 29.11%, 30.98%);
   --green: hsl(97.6, 32.47%, 45.29%);
   --light-green: hsl(77.89, 51.35%, 56.47%);
@@ -13,6 +17,8 @@
   &[data-darkmode="enabled"],
   &:has(.switch__input:checked) {
     --background: var(--dark-background);
+    --accent-background: var(--accent-dark-background);
+    --shadow: var(--dark-shadow);
     --text-color: var(--light-background);
     --accent-color: var(--green);
     --dark-accent: var(--dark-green);
@@ -23,6 +29,8 @@
 
   // light mode
   --background: var(--light-background);
+  --accent-background: var(--accent-light-background);
+  --shadow: var(--light-shadow);
   --text-color: var(--dark-background);
   --accent-color: var(--green);
   --dark-accent: var(--dark-green);
