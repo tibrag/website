@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: stretch;
-    gap: rem(10);
+    gap: rem(25);
 
     @include breakpoint(large) {
     }
@@ -14,4 +14,9 @@
 
 .column {
     flex: 1 0 rem(360);
+    background-color: var(--accent-background);
+    border-radius: rem(5);
+    box-shadow: 0 10px 15px 0 var(--shadow);
+    padding: rem(10);
+    min-height: rem(200);
 }

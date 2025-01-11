@@ -59,8 +59,8 @@ title = 'Scouting Tibrag Sneek'
     weight  = 21
 
   [[menus.main]]
-    name    = 'Junior Scouts'
-    pageRef = '/leden/juniorscouts'
+    name    = 'Zeeverkenners'
+    pageRef = '/leden/zeeverkenners'
     parent  = 'Voor Leden'
     weight  = 22
 
