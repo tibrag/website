@@ -18,5 +18,9 @@
   border-radius: rem(5);
   box-shadow: 0 10px 15px 0 var(--shadow);
   padding: rem(10);
-  min-height: rem(200);
+  min-height: rem(100);
+}
+
+.columns.column-fit > .column {
+  height: fit-content;
 }
