@@ -1,1 +1,1 @@
-<div class="columns">{{ .Inner }}</div>
+<div {{ with .Get "class" }}class="columns {{ . }}"{{ else }}class="columns"{{ end }}>{{ .Inner }}</div>
