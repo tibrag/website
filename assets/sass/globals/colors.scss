@@ -18,6 +18,7 @@
   &:has(.switch__input:checked) {
     --background: var(--dark-background);
     --accent-background: var(--accent-dark-background);
+    --inverse-accent-background: var(--accent-light-background);
     --shadow: var(--dark-shadow);
     --text-color: var(--light-background);
     --accent-color: var(--green);
@@ -30,6 +31,7 @@
   // light mode
   --background: var(--light-background);
   --accent-background: var(--accent-light-background);
+  --inverse-accent-background: var(--accent-dark-background);
   --shadow: var(--light-shadow);
   --text-color: var(--dark-background);
   --accent-color: var(--green);
