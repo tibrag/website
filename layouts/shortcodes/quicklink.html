@@ -1,0 +1,4 @@
+<a {{ with .Get "class" }}class="quicklink {{ . }}"{{ else }}class="quicklink"{{ end }} {{ with .Get "link" }}href="{{ . }}"{{ end }}>
+    <div class="quicklink_header">{{ with .Get "title"}} <b>{{ . }}</b> {{ end }}<p>{{ .Get "icon" | htmlUnescape }}</p></div>
+    <div class="quicklink_content">{{ .Inner }}</div>
+</a>
