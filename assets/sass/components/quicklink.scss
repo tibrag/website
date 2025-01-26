@@ -9,32 +9,48 @@
   gap: rem(25);
 
   .quicklink {
-    flex: 1 0 rem(360);
+    flex: 1 0 rem(150);
     background-color: var(--accent-background);
     border-radius: rem(15);
     box-shadow: 0 10px 15px 0 var(--shadow);
     padding: 0;
-    max-width: rem(210);
-    aspect-ratio: 1/1.5;
+    max-width: rem(250);
+    min-height: rem(300);
     overflow: clip;
     transition: transform 0.2s;
     &:hover {
       transform: scale(1.05);
     }
     &_header {
-      display: flex;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 10fr 1fr;
+      grid-template-rows: 1fr;
       height: 45%;
       background-color: var(--inverse-accent-background);
       color: var(--accent-color);
       padding: rem(10);
       align-items: center;
       justify-content: center;
-      b {
-        position: absolute;
+
+      &_title {
+        grid-area: 1/2;
+        padding: rem(15);
+        text-align: center;
+        z-index: 3;
       }
-      p {
+      &_icon {
+        position: absolute;
         color: var(--text-color);
         font-size: rem(100);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+      }
+      &_arrow {
+        text-align: center;
+        grid-area: 1/3;
       }
     }
     &_content {
@@ -44,9 +60,10 @@
       color: var(--text-color);
       text-align: center;
     }
-  }
-
-  @include breakpoint(large) {
+    @include breakpoint(large) {
+      max-width: clamp(rem(185), 20%, rem(250));
+      aspect-ratio: 1/1.5;
+    }
   }
 }
 

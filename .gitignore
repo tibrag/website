@@ -13,6 +13,7 @@ resources
 .hugo_build.lock
 jsconfig.json
 hugo_stats.json
+go.mod
 go.sum
 yarn.lock
-content
+content/
