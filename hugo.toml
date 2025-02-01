@@ -10,8 +10,8 @@ title = 'Scouting Tibrag Sneek'
     min = '0.134.2'
 
   [[module.imports]]
-    path = 'github.com/tibrag/content'
-    #path = '../../content'
+    #path = 'github.com/tibrag/content'
+    path = '../../content'
     disabled = false
 
     [[module.imports.mounts]]
