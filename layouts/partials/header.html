@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- META Tags SEO -->
-    <meta name="description" content="{{ .Params.description }}">
-    <meta name="keywords" content="{{ .Params.keywords }}">
+    <meta name="description" content="{{ .Params.description }}" />
+    <meta name="keywords" content="{{ .Params.keywords }}" />
     <meta name="title" content="Tibrag Scouting Sneek" />
     <meta name="language" content="nl" />
 
@@ -20,16 +20,19 @@
     />
     <meta
       property="og:image"
-      content="https://www.tibrag.nl/images/Lelievlet_TIBRAG.png"
+      content="https://www.tibrag.nl/images/tibragwit.svg"
     />
+
+    <!-- laad afbeelding tijdig in -->
+    <link rel="preload" href="/images/tibragwit.svg" as="image" />
 
     <!-- als programmas een folder in content is, dan is de uitkomst -> Programmas | Scouting Tibrag Sneek <- in de titel tab -->
     <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
 
     <!-- quick darkmode check -->
     <script data-cfasync="false">
-      const darkmode = localStorage.getItem('darkMode')
-      document.documentElement.dataset.darkmode = darkmode
+      const darkmode = localStorage.getItem("darkMode");
+      document.documentElement.dataset.darkmode = darkmode;
     </script>
 
     <!-- voeg styles toe (css) -->

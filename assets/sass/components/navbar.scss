@@ -2,59 +2,76 @@
 
 .header {
   grid-area: header;
+  width: 100%;
 }
 
 // navigatie (achtergrond) element
 .nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
   top: 0;
   width: 100%;
   min-height: rem(80);
   background: var(--background);
   text-align: left;
   line-height: 30px;
+  justify-content: space-between;
 
   @include breakpoint(medium) {
     padding: 0 rem(40) 0 rem(40);
+    gap: rem(20);
   }
 
   // scouting logo container
   &__logo {
+    top: 0;
+    padding: rem(5);
     display: block;
     z-index: 1000;
+    max-height: rem(80);
 
     @include breakpoint(medium) {
-      position: absolute;
     }
 
     a {
-      position: absolute;
       z-index: 1000;
+      filter: invert(var(--invert));
+      transition: filter 0.4s;
+
+      @include breakpoint(medium) {
+        position: absolute;
+        scale: 2;
+      }
     }
 
     // verandering voor groter scherm:
     @include breakpoint(medium) {
-      a::after {
-        content: "";
-        position: absolute;
-        top: rem(-55);
-        left: rem(-25);
-        z-index: -1;
-        height: 160%;
-        width: 160%;
-        background-image: url("/images/Tibrag-Logo-leeg-doorzichtig.svg");
-        background-size: 100% auto;
-        background-position: 0 bottom;
-        background-repeat: no-repeat;
-        pointer-events: none;
-      }
+      // a::after {
+      //   content: "";
+      //   position: absolute;
+      //   top: rem(-55);
+      //   left: rem(-25);
+      //   z-index: -1;
+      //   height: 160%;
+      //   width: 160%;
+      //   background-image: url("/images/tibragwit.svg");
+      //   background-size: 100% auto;
+      //   background-position: 0 bottom;
+      //   background-repeat: no-repeat;
+      //   pointer-events: none;
+      // }
     }
 
     // scouting logo afbeelding
     img {
-      top: rem(-0);
-      max-width: inherit;
-      max-height: rem(80);
+      aspect-ratio: 1/1;
+      height: rem(70);
       z-index: 110;
+
+      &:has(.switch__input:checked) {
+        filter: invert(1);
+      }
 
       // verandering voor groter scherm:
       @include breakpoint(medium) {
@@ -73,37 +90,55 @@
     }
   }
 
+  .switch {
+    position: absolute;
+    left: calc(50% - 1.5em);
+    top: calc(rem(40) - 0.75em);
+    margin: auto;
+    z-index: 1000;
+
+    // verandering voor groter scherm:
+    @include breakpoint(medium) {
+      position: relative;
+      top: auto;
+      left: auto;
+    }
+  }
+
   // main navigatie menu
   &__menu {
     display: grid;
     width: 100%;
     min-height: rem(80);
-    padding-left: rem(25);
+    //padding-left: rem(25);
     margin: auto;
     position: relative;
-    grid-gap: rem(15);
+    gap: rem(15);
     grid-template-columns: auto;
     grid-template-rows: repeat(6, auto);
     justify-content: stretch;
     list-style: none; // geen markers
     align-items: center;
     border-bottom: 1px solid var(--text-color);
-    padding-top: rem(80);
+    //padding-top: rem(80);
+    padding-inline: rem(5);
     z-index: 100;
     transition: all 0.5s ease;
 
     // verandering voor groter scherm:
     @include breakpoint(medium) {
+      row-gap: 0;
       display: grid;
       padding: 0; // geen maker-padding
       grid-template-rows: 1fr;
-      grid-template-columns: auto 1fr repeat(6, max-content);
+      grid-template-columns: repeat(5, max-content);
       border-bottom: none;
+      justify-content: end;
 
       // start menu rechterkant
-      > :first-child {
-        grid-column: 3;
-      }
+      // > :first-child {
+      //   grid-column: 3;
+      // }
     }
 
     // navigatie link (tekst)
@@ -134,11 +169,9 @@
 
   &__mobile-burger {
     display: none;
+    padding-right: rem(5);
+    grid-column: 3;
     opacity: 0;
-    top: 0;
-    right: 0;
-    padding: rem(20);
-    position: absolute;
     font-size: rem(40);
     font-weight: 900;
     z-index: 110;
@@ -154,11 +187,13 @@
   &__submenu {
     display: block;
     background: var(--background);
-    padding-left: rem(25);
+    margin-left: rem(20);
+    //padding-left: rem(25);
 
     //verandering voor groter scherm:
     @include breakpoint(medium) {
       display: none; // anders knippert menu bij refresh
+      margin-left: auto;
       position: absolute;
       padding-top: rem(5);
       padding-inline: rem(10);
