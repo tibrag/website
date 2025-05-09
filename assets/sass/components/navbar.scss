@@ -194,7 +194,7 @@
     @include breakpoint(medium) {
       display: none; // anders knippert menu bij refresh
       margin-left: auto;
-      position: absolute;
+      position: absolute; // render buiten nav header
       padding-top: rem(5);
       padding-inline: rem(10);
       left: rem(-10);
