@@ -12,6 +12,7 @@
   --blue: hsl(160, 21.89%, 45.69%);
   --orange: hsl(28.26, 87.57%, 65.29%);
   --yellowish: hsl(50.27, 83.46%, 73.92%);
+  --invert: 1;
 
   // dark mode
   &[data-darkmode="enabled"],
@@ -26,6 +27,7 @@
     --light-accent: var(--light-green);
     --link: var(--red);
     --visited: var(--blue);
+    --invert: 0;
   }
 
   // light mode

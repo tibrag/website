@@ -22,18 +22,8 @@ input {
   -webkit-tap-highlight-color: transparent;
 }
 .switch {
-  position: absolute;
-  margin: auto;
-  width: 3em;
-  height: 1.5em;
-  top: calc(40px - calc(1.5em / 2));
-  left: calc(50% - 1.5em);
-  z-index: 1000;
-
   // verandering voor groter scherm:
   @include breakpoint(medium) {
-    left: auto;
-    right: rem(50);
   }
 }
 .switch__input,
