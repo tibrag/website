@@ -5,7 +5,6 @@
 - Voorpagina
 - Socials Linktree
 - Meedoen eigen pagina
-- Hosting regelen
 
 <https://formspree.io> (max 50 inzendingen per maand)
 <https://un-static.com/how-to/add-hugo-contact-form/>
