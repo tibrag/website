@@ -1,11 +1,31 @@
 @use "../util" as *;
 
+// ============================================================
+// HEADER & NAVIGATION STYLES
+// ============================================================
+
 .header {
   grid-area: header;
   width: 100%;
 }
 
-// navigatie (achtergrond) element
+// ============================================================
+// LOGO DARK/LIGHT MODE SWITCHING
+// ============================================================
+
+:root:has(.switch__input:checked) {
+  .logo-light {
+    display: block;
+  }
+  .logo-dark {
+    display: none;
+  }
+}
+
+// ============================================================
+// MAIN NAVIGATION BAR
+// ============================================================
+
 .nav {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -19,72 +39,76 @@
   justify-content: space-between;
 
   @include breakpoint(medium) {
-    padding: 0 rem(40) 0 rem(40);
+    padding: 0 rem(40);
     gap: rem(20);
   }
 
-  // scouting logo container
+  // ============================================================
+  // HIDDEN CHECKBOX FOR MENU TOGGLE (No JS needed!)
+  // ============================================================
+
+  &__menu-checkbox {
+    display: none;
+  }
+
+  // ============================================================
+  // LOGO SECTION
+  // ============================================================
+
   &__logo {
+    grid-column: 1;
     top: 0;
+    height: 100%;
+    width: rem(40);
     padding: rem(5);
     display: block;
-    z-index: 1000;
+    z-index: 99;
     max-height: rem(80);
 
-    @include breakpoint(medium) {
+    @include breakpoint(large) {
+      z-index: 110;
     }
 
     a {
-      z-index: 1000;
-      filter: invert(var(--invert));
-      transition: filter 0.4s;
+      z-index: 99;
+      transition: filter 0.4s ease;
 
       @include breakpoint(medium) {
-        padding-top: rem(8);
         position: absolute;
-        scale: 2;
+        scale: 1;
       }
     }
 
-    // verandering voor groter scherm:
-    @include breakpoint(medium) {
-      // a::after {
-      //   content: "";
-      //   position: absolute;
-      //   top: rem(-55);
-      //   left: rem(-25);
-      //   z-index: -1;
-      //   height: 160%;
-      //   width: 160%;
-      //   background-image: url("/images/tibragwitlogo.svg");
-      //   background-size: 100% auto;
-      //   background-position: 0 bottom;
-      //   background-repeat: no-repeat;
-      //   pointer-events: none;
-      // }
-    }
-
-    // scouting logo afbeelding
     img {
-      aspect-ratio: 1/1;
+      transform: rotate(90deg);
+      transform-origin: left top;
+      margin-left: rem(70);
       height: rem(70);
       z-index: 110;
+      transition: transform 0.3s ease, margin 0.3s ease;
 
-      &:has(.switch__input:checked) {
-        filter: invert(1);
+      &.logo-light {
+        display: none;
       }
 
-      // verandering voor groter scherm:
       @include breakpoint(medium) {
-        max-height: rem(120);
+        margin-left: rem(30);
+      }
+
+      @include breakpoint(large) {
+        transform: none;
+        margin-left: 0
       }
     }
   }
+
+  // ============================================================
+  // DARK MODE TOGGLE
+  // ============================================================
 
   &-darkmode-toggle {
     display: none;
 
-    // verandering voor groter scherm:
     @include breakpoint(medium) {
       display: block;
       width: rem(80);
@@ -98,117 +122,167 @@
     margin: auto;
     z-index: 1000;
 
-    // verandering voor groter scherm:
     @include breakpoint(medium) {
       position: relative;
       top: auto;
       left: auto;
+      grid-column: 3;
     }
   }
 
-  // main navigatie menu
+  // ============================================================
+  // HAMBURGER MENU BUTTON (Pure CSS!)
+  // ============================================================
+
+  &__mobile-burger {
+    display: block;
+    padding-right: rem(5);
+    grid-column: 3;
+    font-size: rem(40);
+    font-weight: 900;
+    z-index: 110;
+    color: var(--accent-color);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+    @include breakpoint(medium) {
+      display: none;
+    }
+  }
+
+  // ============================================================
+  // MAIN NAVIGATION MENU (Animated with pure CSS!)
+  // ============================================================
+
   &__menu {
-    display: grid;
     width: 100%;
-    min-height: rem(80);
-    //padding-left: rem(25);
+    display: grid;
+    grid-column: 1 / -1;
+    background-color: var(--background);
+    
+    // REMOVED min-height to fix issue #1
     margin: auto;
     position: relative;
     gap: rem(15);
     grid-template-columns: auto;
     grid-template-rows: repeat(6, auto);
     justify-content: stretch;
-    list-style: none; // geen markers
+    list-style: none;
     align-items: center;
     border-bottom: 1px solid var(--text-color);
-    //padding-top: rem(80);
-    padding-inline: rem(5);
+    padding-inline: rem(15);
     z-index: 100;
-    transition: all 0.5s ease;
 
-    // verandering voor groter scherm:
+    // Hidden by default on mobile - FIX #1 & #2
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    // Synchronized transitions - FIX #2
+    transition: max-height 0.4s ease-in-out,
+                opacity 0.4s ease-in-out,
+                padding 0.4s ease-in-out;
+
+    // Desktop: always visible
     @include breakpoint(medium) {
+      grid-column: 2 !important;
+      grid-row: 1 / -1;
+      max-height: none;
+      opacity: 1;
+      overflow: visible;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-inline: rem(5);
       row-gap: 0;
       display: grid;
-      padding: 0; // geen maker-padding
-      grid-template-rows: 1fr;
+      padding: 0;
       grid-template-columns: repeat(5, max-content);
       border-bottom: none;
       justify-content: end;
-
-      // start menu rechterkant
-      // > :first-child {
-      //   grid-column: 3;
-      // }
+      grid-column: 3;
     }
 
-    // navigatie link (tekst)
-    a {
+    @include breakpoint(large) {
+      column-gap: rem(25);
+    }
+
+    a,
+    label {
       display: inline-block;
       width: 100%;
       font-size: 1em;
       color: var(--accent-color);
       font-weight: bolder;
       cursor: pointer;
+      transition: color 0.3s ease;
 
-      // muis erop of tab target
       &:hover,
       &:focus-visible,
       &:active {
-        color: var(--light-text-accent);
+        color: var(--light-accent);
         text-decoration: none;
       }
+    }
+  }
 
-      @supports not selector(:focus-visible) {
-        &:focus {
-          color: var(--light-text-accent);
-          text-decoration: none;
+  // ============================================================
+  // DROPDOWN MENUS (Pure CSS with checkbox!)
+  // ============================================================
+
+  &__dropdown {
+    position: relative;
+
+    &-checkbox {
+      display: none;
+    }
+
+    label {
+      position: relative;
+      padding-right: rem(20);
+
+      // Add arrow indicator
+      &::after {
+        content: "▼";
+        position: absolute;
+        right: 0;
+        font-size: 0.7em;
+        transition: transform 0.3s ease;
+
+        @include breakpoint(medium) {
+          content: "";
+          display: none;
         }
       }
     }
   }
 
-  &__mobile-burger {
-    display: none;
-    padding-right: rem(5);
-    grid-column: 3;
-    opacity: 0;
-    font-size: rem(40);
-    font-weight: 900;
-    z-index: 110;
-  }
-
-  // menu element met onderliggend menu
-  &__dropdown {
-    position: relative;
-    //cursor: pointer;
-  }
-
-  // het onderliggende menu
   &__submenu {
     display: block;
     background: var(--background);
     margin-left: rem(20);
-    //padding-left: rem(25);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
 
-    //verandering voor groter scherm:
     @include breakpoint(medium) {
-      display: none; // anders knippert menu bij refresh
+      display: none;
+      max-height: none;
       margin-left: auto;
-      position: absolute; // render buiten nav header
+      position: absolute;
       padding-top: rem(5);
       padding-inline: rem(10);
       left: rem(-10);
       border-radius: rem(10);
       z-index: 1000;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: transform 0.3s ease;
     }
 
-    // de lijst in het submenu
     ul {
       display: grid;
-      // max-width: rem(300);
-      // min-width: rem(250);
-      padding-left: 0; //padding around submenu (top, right, bot, left)
+      padding-left: 0;
       grid-gap: rem(0);
       grid-template-columns: 1fr;
       grid-template-rows: auto;
@@ -216,20 +290,51 @@
       list-style: none;
       text-wrap: nowrap;
 
-      // de linkjes in de lijst
-      li {
-        a {
-          width: 100%;
-          -webkit-transition: all 0.3s;
-          -moz-transition: all 0.3s;
-          -o-transition: all 0.3s;
-          transition: all 0.3s;
+      li a {
+        width: 100%;
+        transition: all 0.3s ease;
 
-          @include breakpoint(medium) {
-            padding-block: rem(5);
-          }
+        @include breakpoint(medium) {
+          padding-block: rem(5);
         }
       }
     }
   }
+
+  // Desktop: show submenu on hover
+  &__dropdown:hover &__submenu,
+  &__dropdown:focus-within &__submenu {
+    @include breakpoint(medium) {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// ============================================================
+// CHECKBOX STATES (Must be outside .nav for sibling selectors!)
+// ============================================================
+
+// Show menu when checkbox is checked
+.nav__menu-checkbox:checked ~ .nav__menu {
+  max-height: rem(1000);
+  opacity: 1;
+  padding-top: rem(20);
+  padding-bottom: rem(20);
+}
+
+// Rotate hamburger when menu is open
+.nav__menu-checkbox:checked ~ .nav__mobile-burger {
+  transform: rotate(90deg);
+}
+
+// Show submenu when dropdown checkbox is checked
+.nav__dropdown-checkbox:checked ~ .nav__submenu {
+  max-height: rem(500);
+}
+
+// Rotate arrow when dropdown is open
+.nav__dropdown-checkbox:checked + label::after {
+  transform: rotate(180deg);
 }

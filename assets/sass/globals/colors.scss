@@ -1,20 +1,26 @@
 :root {
-  --dark-background: hsl(130, 26.09%, 9.02%);
-  --light-background: hsl(130, 13.04%, 90.02%);
-  --accent-dark-background: hsl(140, 26.09%, 13.02%);
-  --accent-light-background: hsl(130, 26.09%, 100%);
+  /* Base colors - updated to blue hues inspired by water and boats */
+  --dark-background: hsl(210, 30%, 12%);
+  --light-background: hsl(205, 25%, 92%);
+  --accent-dark-background: hsl(210, 35%, 18%);
+  --accent-light-background: hsl(205, 30%, 98%);
   --dark-shadow: hsl(0, 0%, 8.7%);
   --light-shadow: hsl(0, 0%, 80%);
-  --dark-green: hsl(131.74, 29.11%, 30.98%);
-  --green: hsl(97.6, 32.47%, 45.29%);
-  --light-green: hsl(77.89, 51.35%, 56.47%);
-  --red: hsl(358.97, 46.61%, 50.78%);
-  --blue: hsl(160, 21.89%, 45.69%);
-  --orange: hsl(28.26, 87.57%, 65.29%);
-  --yellowish: hsl(50.27, 83.46%, 73.92%);
+  
+  /* Blue color palette - inspired by water, boats, and nautical themes */
+  --dark-blue: hsl(210, 45%, 25%);        /* Deep navy blue like the boat hull */
+  --blue: hsl(205, 50%, 45%);             /* Classic water blue */
+  --light-blue: hsl(200, 55%, 65%);       /* Light sky/water blue */
+  
+  /* Accent colors */
+  --red: hsl(358.97, 46.61%, 50.78%);     /* Keep red for accents (boat stripes) */
+  --teal: hsl(185, 40%, 50%);             /* Teal for visited links */
+  --orange: hsl(28.26, 87.57%, 65.29%);   /* Keep orange for highlights */
+  --yellow: hsl(50.27, 83.46%, 73.92%);   /* Keep yellow for accents */
+  
   --invert: 1;
-
-  // dark mode
+  
+  /* Dark mode */
   &[data-darkmode="enabled"],
   &:has(.switch__input:checked) {
     --background: var(--dark-background);
@@ -22,35 +28,40 @@
     --inverse-accent-background: var(--accent-light-background);
     --shadow: var(--dark-shadow);
     --text-color: var(--light-background);
-    --accent-color: var(--green);
-    --dark-accent: var(--dark-green);
-    --light-accent: var(--light-green);
+    --accent-color: var(--blue);
+    --dark-accent: var(--dark-blue);
+    --light-accent: var(--light-blue);
     --link: var(--red);
-    --visited: var(--blue);
+    --visited: var(--teal);
     --invert: 0;
   }
-
-  // light mode
+  
+  /* Light mode */
   --background: var(--light-background);
   --accent-background: var(--accent-light-background);
   --inverse-accent-background: var(--accent-dark-background);
   --shadow: var(--light-shadow);
   --text-color: var(--dark-background);
-  --accent-color: var(--green);
-  --dark-accent: var(--dark-green);
-  --light-accent: var(--light-green);
+  --accent-color: var(--blue);
+  --dark-accent: var(--dark-blue);
+  --light-accent: var(--light-blue);
   --link: var(--red);
-  --visited: var(--blue);
+  --visited: var(--teal);
 }
 
-// @media (prefers-color-scheme: dark) {
-//   :root {
-//     --background: var(--dark-background);
-//     --text-color: var(--light-background);
-//     --accent-color: var(--green);
-//     --dark-accent: var(--dark-green);
-//     --light-accent: var(--light-green);
-//     --link: var(--red);
-//     --visited: var(--blue);
-//   }
-// }
+/* Optional: Additional nautical-themed utility classes */
+.nautical-primary {
+  color: var(--blue);
+}
+
+.nautical-dark {
+  color: var(--dark-blue);
+}
+
+.nautical-light {
+  color: var(--light-blue);
+}
+
+.nautical-accent {
+  color: var(--red);
+}

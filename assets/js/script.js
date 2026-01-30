@@ -1,24 +1,24 @@
 console.log('JS is loaded!')
 
 // Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu/bar icon
-function mobileNavToggle (how) {
-  console.log('Burger toggle: ', how)
-  const x = document.getElementsByClassName('nav__menu')[0]
-  switch (how) {
-    case 'auto':
-      x.classList.toggle('hidden')
-      break
+// function mobileNavToggle (how) {
+//   console.log('Burger toggle: ', how)
+//   const x = document.getElementsByClassName('nav__menu')[0]
+//   switch (how) {
+//     case 'auto':
+//       x.classList.toggle('hidden')
+//       break
 
-    case 'off':
-      x.classList.add('hidden')
-      break
+//     case 'off':
+//       x.classList.add('hidden')
+//       break
 
-    case 'on':
-      x.classList.remove('hidden')
-      break
-  }
-}
-window.mobileNavToggle = mobileNavToggle
+//     case 'on':
+//       x.classList.remove('hidden')
+//       break
+//   }
+// }
+// window.mobileNavToggle = mobileNavToggle
 
 let portrait = window.innerWidth <= 640
 const burger = document.getElementsByClassName('nav__mobile-burger')[0]
