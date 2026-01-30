@@ -7,31 +7,31 @@
   {{- $image_dark := resources.GetMatch "**/tibrag-logo-pill-darkmode.svg" }}
   {{- $banner := resources.GetMatch (printf "%s%s" "**/" $banner_name) }}
   {{- $home := $page.Site.BaseURL }}
-  
+
   {{- with index site.Menus $menuID }}
     <menu class="nav no-transition">
       <a class="screen-reader-text visually-hidden" href="#main">Direct naar inhoud</a>
-      
+
       <!-- Hidden checkbox for menu toggle -->
       <input type="checkbox" id="mobile-menu-toggle" class="nav__menu-checkbox" hidden>
-      
+
       <li class="nav__logo nav_item noselect">
         <a href="{{ $home }}">
           <img class="logo-light" src="{{ $image_light.RelPermalink }}" alt="Start">
           <img class="logo-dark" src="{{ $image_dark.RelPermalink }}" alt="Start">
         </a>
       </li>
-      
+
       <!-- Hamburger label (replaces the <a> tag) -->
       <label for="mobile-menu-toggle" class="nav__mobile-burger noselect">
         <span>☰</span>
       </label>
-      
+
       <ul class="nav__menu">
         {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
         <li class="nav__item nav__item__childless nav-darkmode-toggle"></li>
       </ul>
-      
+
       {{ partial "toggle.html" (dict "menuID" "main" "page" .) }}
     </menu>
   {{- end }}
