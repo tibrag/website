@@ -1,31 +1,31 @@
 console.log("JS is loaded!");
 
-let portrait = window.innerWidth <= 640;
-const burger = document.getElementsByClassName("nav__mobile-burger")[0];
-if (window.innerWidth < 640) {
-  burger.classList.add("showing");
-  mobileNavToggle("off");
-  // burger.style.display = 'none'; // Hide element in landscape mode
-} else {
-  burger.classList.remove("showing");
-  mobileNavToggle("on");
-}
-function burgerState() {
-  if (portrait && window.innerWidth >= 640) {
-    portrait = false;
-    console.log("was portrait, now portrait =", portrait);
-    mobileNavToggle("on");
-    burger.classList.remove("showing");
-    // burger.style.display = 'none'; // Hide element in landscape mode
-  } else if (!portrait && window.innerWidth <= 640) {
-    portrait = true;
-    console.log("was landscape, now portrait =", portrait);
-    mobileNavToggle("off");
-    burger.classList.add("showing");
-    // burger.style.display = 'absolute'; // Set element to absolute in portrait mode
-    // burger.style.display = 'block'; // Show element in portrait mode
-  }
-}
+// let portrait = window.innerWidth <= 640;
+// const burger = document.getElementsByClassName("nav__mobile-burger")[0];
+// if (window.innerWidth < 640) {
+//   burger.classList.add("showing");
+//   mobileNavToggle("off");
+//   // burger.style.display = 'none'; // Hide element in landscape mode
+// } else {
+//   burger.classList.remove("showing");
+//   mobileNavToggle("on");
+// }
+// function burgerState() {
+//   if (portrait && window.innerWidth >= 640) {
+//     portrait = false;
+//     console.log("was portrait, now portrait =", portrait);
+//     mobileNavToggle("on");
+//     burger.classList.remove("showing");
+//     // burger.style.display = 'none'; // Hide element in landscape mode
+//   } else if (!portrait && window.innerWidth <= 640) {
+//     portrait = true;
+//     console.log("was landscape, now portrait =", portrait);
+//     mobileNavToggle("off");
+//     burger.classList.add("showing");
+//     // burger.style.display = 'absolute'; // Set element to absolute in portrait mode
+//     // burger.style.display = 'block'; // Show element in portrait mode
+//   }
+// }
 
 // Throttle function to limit how often function is called
 function throttle(func, limit) {
