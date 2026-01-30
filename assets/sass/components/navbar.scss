@@ -85,7 +85,9 @@
       margin-left: rem(70);
       height: rem(70);
       z-index: 110;
-      transition: transform 0.3s ease, margin 0.3s ease;
+      transition:
+        transform 0.3s ease,
+        margin 0.3s ease;
 
       &.logo-light {
         display: none;
@@ -97,7 +99,7 @@
 
       @include breakpoint(large) {
         transform: none;
-        margin-left: 0
+        margin-left: 0;
       }
     }
   }
@@ -159,7 +161,7 @@
     display: grid;
     grid-column: 1 / -1;
     background-color: var(--background);
-    
+
     // REMOVED min-height to fix issue #1
     margin: auto;
     position: relative;
@@ -180,9 +182,10 @@
     padding-top: 0;
     padding-bottom: 0;
     // Synchronized transitions - FIX #2
-    transition: max-height 0.4s ease-in-out,
-                opacity 0.4s ease-in-out,
-                padding 0.4s ease-in-out;
+    transition:
+      max-height 0.4s ease-in-out,
+      opacity 0.4s ease-in-out,
+      padding 0.4s ease-in-out;
 
     // Desktop: always visible
     @include breakpoint(medium) {
