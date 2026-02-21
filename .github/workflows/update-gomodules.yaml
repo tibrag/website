@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           token: ${{ secrets.PAT_GITHUB }}
 
@@ -43,6 +43,6 @@ jobs:
       - name: Create and Merge Pull Request
         run: |
           gh pr create --title "Update Go dependencies" --body "This PR updates the Go module dependencies." --head update-go-modules-branch --base main
-          gh pr merge --rebase --auto --delete-branch
+          gh pr merge --squash --auto --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
