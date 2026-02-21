@@ -1,0 +1,144 @@
+---
+name: Deploy to Cloudflare Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - ".github/**"
+      - ".vscode/**"
+      - ".gitattributes"
+      - ".gitignore"
+      - "README.md"
+      - "LICENSE"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+  CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CF_PROJECT_NAME: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+          extended: true
+
+      - name: Build site
+        run: hugo --gc --minify
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ env.CF_API_TOKEN }}
+          accountId: ${{ env.CF_ACCOUNT_ID }}
+          command: pages deploy public --project-name=${{ env.CF_PROJECT_NAME }} --commit-dirty=true
+
+  cleanup-old-deployments:
+    needs: build-and-deploy
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup old deployments
+        run: |
+          set -euo pipefail
+
+          echo "🧹 Starting deployment cleanup for project: ${CF_PROJECT_NAME}"
+          echo "📋 Strategy: Keep only the latest deployment, remove all others"
+
+          deployments=$(curl -s -X GET \
+            "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/pages/projects/${CF_PROJECT_NAME}/deployments" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json")
+
+          success=$(echo "$deployments" | jq -r '.success')
+          if [[ "$success" != "true" ]]; then
+            echo "Failed to fetch deployments:"
+            echo "$deployments"
+            exit 1
+          fi
+
+          # Sort deployments by created_on date (newest first) and get all except the first one
+          sorted_deployments=$(echo "$deployments" | jq -c '.result | sort_by(.created_on) | reverse')
+          total_deployments=$(echo "$sorted_deployments" | jq 'length')
+
+          echo "📊 Total deployments found: $total_deployments"
+
+          if [[ "$total_deployments" -le 1 ]]; then
+            echo "✅ Only one or no deployments found. Nothing to clean up."
+            exit 0
+          fi
+
+          # Keep the first (newest) deployment, process the rest for deletion
+          latest_deployment=$(echo "$sorted_deployments" | jq -r '.[0].id')
+          latest_created_on=$(echo "$sorted_deployments" | jq -r '.[0].created_on')
+          echo "🔒 Keeping latest deployment: $latest_deployment (created: $latest_created_on)"
+
+          deleted_count=0
+          skipped_count=0
+
+          # Process all deployments except the first one
+          while read -r deployment; do
+            deployment_id=$(echo "$deployment" | jq -r '.id')
+            created_on=$(echo "$deployment" | jq -r '.created_on')
+            deployment_status=$(echo "$deployment" | jq -r '.latest_stage.status')
+
+            is_live=$(echo "$deployment" | jq '.aliases | length > 0')
+            is_production=$(echo "$deployment" | jq '.production_environment != null')
+
+            # Skip if it's live or production for safety
+            if [[ "$is_live" == "true" || "$is_production" == "true" ]]; then
+              echo "⏭️  Skipping deployment: $deployment_id (live or production)"
+              skipped_count=$((skipped_count + 1))
+              continue
+            fi
+
+            echo "🗑️  Deleting deployment: $deployment_id (created: $created_on)"
+            delete_response=$(curl -s -X DELETE \
+              "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/pages/projects/${CF_PROJECT_NAME}/deployments/${deployment_id}" \
+              -H "Authorization: Bearer ${CF_API_TOKEN}" \
+              -H "Content-Type: application/json")
+
+            # Check if response is valid JSON before parsing
+            if echo "$delete_response" | jq empty 2>/dev/null; then
+              delete_success=$(echo "$delete_response" | jq -r '.success // false')
+              if [[ "$delete_success" == "true" ]]; then
+                echo "✅ Successfully deleted deployment $deployment_id"
+                deleted_count=$((deleted_count + 1))
+              else
+                echo "❌ Failed to delete deployment $deployment_id (API returned success=false):"
+                echo "$delete_response"
+              fi
+            else
+              # Handle non-JSON or malformed JSON response
+              echo "⚠️  Warning: Invalid JSON response for deployment $deployment_id"
+              echo "Raw response: $delete_response"
+              # Check HTTP status code to determine if deletion might have succeeded
+              if [[ -z "$delete_response" ]] || [[ "$delete_response" == *"204"* ]] || [[ "$delete_response" == *"200"* ]]; then
+                echo "🤞 Assuming deletion succeeded (empty or HTTP success response)"
+                deleted_count=$((deleted_count + 1))
+              else
+                echo "❌ Assuming deletion failed due to unexpected response"
+              fi
+            fi
+          done < <(echo "$sorted_deployments" | jq -c '.[1:][]')
+
+          echo "📊 Cleanup summary: Deleted $deleted_count deployments, skipped $skipped_count deployments, kept 1 latest deployment"
