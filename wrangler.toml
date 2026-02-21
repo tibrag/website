@@ -3,4 +3,3 @@ pages_build_output_dir = "./public"
 
 [vars]
 HUGO_VERSION = "0.154.5"
-HUGO_DARTSASS_BINARY = "./node_modules/.bin/sass"
