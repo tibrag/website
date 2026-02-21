@@ -1,23 +1,33 @@
 ---
-# File: .github/dependabot.yml
-# Docs: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 version: 2
+
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "03:00"
-    assignees:
-      - groveld
+      time: "06:00"
+      timezone: "Europe/Amsterdam"
+    open-pull-requests-limit: 1
+    groups:
+      actions-deps:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "03:00"
-    assignees:
-      - groveld
+      time: "06:00"
+      timezone: "Europe/Amsterdam"
+    open-pull-requests-limit: 1
+    groups:
+      gomod-deps:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
