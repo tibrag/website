@@ -42,8 +42,8 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16" />
 
     <!-- SCSS (aka sass) object oriented css -->
-    {{ $opts := dict "transpiler" "dartsass" "targetPath" "css/style.css" }} {{
-    with resources.Get "sass/main.scss" | toCSS $opts | minify | fingerprint }}
+    {{ $opts := dict "transpiler" "dartsass" "targetPath" "css/style.css" }} 
+    {{ with resources.Get "sass/main.scss" | css.Sass $opts | minify | fingerprint }}
     <link
       rel="stylesheet"
       href="{{ .RelPermalink }}"
