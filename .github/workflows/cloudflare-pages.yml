@@ -52,10 +52,19 @@ jobs:
           node-version: "20"
 
       - name: Install Dart Sass
-        run: npm install -g sass
+        run: |
+          npm install -g sass
+          # Ensure the npm global bin directory is in PATH
+          echo "$(npm prefix -g)/bin" >> $GITHUB_PATH
+          # Verify sass is accessible
+          which sass
+          sass --version
 
       - name: Build site
         run: hugo --gc --minify
+        env:
+          # Ensure Hugo can find the Dart Sass binary
+          HUGO_PARAMS_DARTSASS_EMBEDDED: false
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
