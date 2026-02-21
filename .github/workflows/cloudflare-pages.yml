@@ -3,13 +3,13 @@ name: Deploy to Cloudflare Pages
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [cloudflare-pages]
   push:
     branches: [main]
     paths-ignore:
       - ".github/**"
       - ".vscode/**"
-      - ".gitattributes"
-      - ".gitignore"
       - "README.md"
       - "LICENSE"
 
