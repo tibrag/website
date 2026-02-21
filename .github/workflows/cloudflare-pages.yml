@@ -30,35 +30,64 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      GO_VERSION: 1.26.0
+      NODE_VERSION: 24.13.1
+      DART_SASS_VERSION: 1.97.3
+      HUGO_VERSION: 0.156.0
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
           submodules: recursive
+          fetch-depth: 0
 
       - name: Update submodules to latest
         run: git submodule update --remote --recursive
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - name: Setup Go
+        uses: actions/setup-go@v6
         with:
-          hugo-version: "latest"
-          extended: true
+          go-version: ${{ env.GO_VERSION }}
+          cache: false
 
-      - name: Setup Node.js (for Sass)
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install dependencies
-        run: npm install
+      - name: Create directory for user-specific executable files
+        run: |
+          mkdir -p "${HOME}/.local"
 
-      - name: Build site
-        run: hugo --gc --minify
-        env:
-          # Use embedded Dart Sass from npm dependencies
-          HUGO_PARAMS_DARTSASS_EMBEDDED: true
+      - name: Install Dart Sass
+        run: |
+          curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          tar -C "${HOME}/.local" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          echo "${HOME}/.local/dart-sass" >> "${GITHUB_PATH}"
+
+      - name: Install Hugo
+        run: |
+          curl -sLJO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          mkdir "${HOME}/.local/hugo"
+          tar -C "${HOME}/.local/hugo" -xf "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          rm "hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          echo "${HOME}/.local/hugo" >> "${GITHUB_PATH}"
+
+      - name: Verify installations
+        run: |
+          echo "Dart Sass: $(sass --version)"
+          echo "Go: $(go version)"
+          echo "Hugo: $(hugo version)"
+          echo "Node.js: $(node --version)"
+
+      # - name: Install Node.js dependencies
+      #   run: |
+      #     [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
+
+      - name: Build the site
+        run: hugo build --gc --minify
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
