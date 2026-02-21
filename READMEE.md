@@ -19,24 +19,18 @@
 - Voorpagina
 - Socials Linktree
 
-## Workflow
-
-- add back --minify to the hugo command under --gc
-
 ## Installatie
 
 installeer sass (https://sass-lang.com/install) en voeg het toe aan je PATH zodat het overal in de terminal beschikbaar is.
+Installeer hugo extended (https://gohugo.io/getting-started/installing/)
 
-1. Installeer hugo extended (https://gohugo.io/getting-started/installing/)
-2. Clone deze repository
+1. Clone deze repository
 
-git clone --recurse-submodules https://github.com/tibrag/website.git
+```sh
+git clone --recurse-submodules --remote https://github.com/tibrag/website.git
+```
 
-npm install (om de node modules te installeren, nodig voor het bouwen van de css)
-
-3. Ga naar de map van deze repository in de terminal
-
-4. Run `hugo server` om de website lokaal te bekijken
-5. Run `hugo` om de website te bouwen (output in de public map)
-6. Run `hugo --gc --minify` om de website te bouwen met garbage collection en minificatie (output in de public map)
-7. Deploy de inhoud van de public map naar een webserver of hosting service (zoals Netlify, Vercel, etc.)
+2. Run `cd website` om naar de map van deze repository te gaan in de terminal
+3. Run `hugo server` om de website lokaal te bekijken
+4. Run `hugo --gc --minify` om de website te bouwen met garbage collection en minificatie (output in de public map)
+5. Deploy de inhoud van de public map naar een webserver of hosting service
