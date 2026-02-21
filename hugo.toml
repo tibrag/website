@@ -1,80 +1,68 @@
 languageCode = 'nl-NL'
 title = 'Scouting Tibrag Sneek'
 
+contentDir = "content/content"
+
 [markup.goldmark.renderer]
-  unsafe = true
+unsafe = true
 
 [module]
-  [module.hugoVersion]
-    extended = true
-    min = '0.134.2'
-
-  [[module.imports]]
-    # In TEST: path = ../../content and disabled = true (for local tests - hugo server).
-    # In PRODUCTION: path = github.com/tibrag/content and disabled = false (for pushes to github).
-    path = 'github.com/tibrag/content'
-    #path = '../../content'
-    disabled = false
-
-    [[module.imports.mounts]]
-      source = 'content'
-      target = 'content'
+[module.hugoVersion]
+extended = true
+min = '0.134.2'
 
 [params]
-  robots_txt = true
+robots_txt = true
 
 [sitemap]
-  changeFreq = ''
-  disable = true
-  filename = 'sitemap-hugo.xml'
-  priority = -1
+disable = true
 
 [menus]
-  [[menus.main]]
-    name    = 'De vereniging'
-    pageRef = '/vereniging'
-    weight  = 10
+[[menus.main]]
+name = 'De vereniging'
+pageRef = '/vereniging'
+weight = 10
 
-  [[menus.main]]
-    name    = 'Wat is scouting?'
-    pageRef = '/vereniging/scouting'
-    parent  = 'De vereniging'
-    weight  = 11
+[[menus.main]]
+name = 'Wat is scouting?'
+pageRef = '/vereniging/scouting'
+parent = 'De vereniging'
+weight = 11
 
-  [[menus.main]]
-    name    = 'Wat is TIBRAG?'
-    pageRef = '/vereniging/tibrag'
-    parent  = 'De vereniging'
-    weight  = 12
+[[menus.main]]
+name = 'Wat is TIBRAG?'
+pageRef = '/vereniging/tibrag'
+parent = 'De vereniging'
+weight = 12
 
-  [[menus.main]]
-    name    = 'Speltakken'
-    pageRef = '/vereniging/speltakken'
-    parent  = 'De vereniging'
-    weight  = 13
+[[menus.main]]
+name = 'Speltakken'
+pageRef = '/vereniging/speltakken'
+parent = 'De vereniging'
+weight = 13
 
-  [[menus.main]]
-    name    = 'Voor Leden'
-    pageRef = '/leden'
-    weight  = 20
+[[menus.main]]
+name = 'Voor Leden'
+pageRef = '/leden'
+weight = 20
 
-  [[menus.main]]
-    name    = 'Dolfijnen'
-    pageRef = '/leden/dolfijnen'
-    parent  = 'Voor Leden'
-    weight  = 21
+[[menus.main]]
+name = 'Dolfijnen'
+pageRef = '/leden/dolfijnen'
+parent = 'Voor Leden'
+weight = 21
 
-  [[menus.main]]
-    name    = 'Zeeverkenners'
-    pageRef = '/leden/zeeverkenners'
-    parent  = 'Voor Leden'
-    weight  = 22
+[[menus.main]]
+name = 'Zeeverkenners'
+pageRef = '/leden/zeeverkenners'
+parent = 'Voor Leden'
+weight = 22
 
-  [[menus.main]]
-    name    = 'Loodsen'
-    pageRef = '/leden/loodsen'
-    parent  = 'Voor Leden'
-    weight  = 23
+[[menus.main]]
+name = 'Loodsen'
+pageRef = '/leden/loodsen'
+parent = 'Voor Leden'
+weight = 23
 
 #  [[menus.main]]
 #    name    = 'Voor Leiding'
@@ -93,35 +81,35 @@ title = 'Scouting Tibrag Sneek'
 #    parent  = 'Voor Leiding'
 #    weight  = 32
 
-  [[menus.main]]
-    name    = 'Meedoen'
-    pageRef = '/meedoen'
-    weight  = 40
+[[menus.main]]
+name = 'Meedoen'
+pageRef = '/meedoen'
+weight = 40
 
-  [[menus.main]]
-    name    = 'Lid Worden'
-    pageRef = '/meedoen/lid'
-    parent  = 'Meedoen'
-    weight  = 41
+[[menus.main]]
+name = 'Lid Worden'
+pageRef = '/meedoen/lid'
+parent = 'Meedoen'
+weight = 41
 
-  [[menus.main]]
-    name    = 'Leiding Worden'
-    pageRef = '/meedoen/leiding'
-    parent  = 'Meedoen'
-    weight  = 42
+[[menus.main]]
+name = 'Leiding Worden'
+pageRef = '/meedoen/leiding'
+parent = 'Meedoen'
+weight = 42
 
-  [[menus.main]]
-    name    = 'Club Sponsoren'
-    pageRef = '/meedoen/sponsoren'
-    parent  = 'Meedoen'
-    weight  = 43
+[[menus.main]]
+name = 'Club Sponsoren'
+pageRef = '/meedoen/sponsoren'
+parent = 'Meedoen'
+weight = 43
 
-  [[menus.main]]
-    name    = 'Verhuur'
-    pageRef = '/verhuur'
-    weight  = 50
+[[menus.main]]
+name = 'Verhuur'
+pageRef = '/verhuur'
+weight = 50
 
-  [[menus.main]]
-    name    = 'Contact'
-    pageRef = '/contact'
-    weight  = 60
+[[menus.main]]
+name = 'Contact'
+pageRef = '/contact'
+weight = 60
