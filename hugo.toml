@@ -11,6 +11,17 @@ unsafe = true
 extended = true
 min = '0.134.2'
 
+[outputFormats]
+[outputFormats.CSS]
+mediaType = "text/css"
+isHTML = false
+isPlainText = false
+rel = "stylesheet"
+
+[outputs]
+home = ["HTML", "CSS", "RSS"]
+page = ["HTML", "CSS"]
+
 [params]
 robots_txt = true
 
