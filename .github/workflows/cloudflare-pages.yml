@@ -4,7 +4,7 @@ name: Deploy to Cloudflare Pages
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [cloudflare-pages]
+    types: [content-update]
   push:
     branches: [main]
     paths-ignore:
