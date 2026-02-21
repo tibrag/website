@@ -42,15 +42,20 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16" />
 
     <!-- SCSS (aka sass) object oriented css -->
-    {{ $resource := resources.Get "sass/main.scss" }}
-    {{ with css.Sass $opts $resource | minify | fingerprint }}
-    <link
-      rel="stylesheet"
-      href="{{ .RelPermalink }}"
-      integrity="{{ .Data.Integrity }}"
-      crossorigin="anonymous"
-    />
+    {{ with resources.Get "sass/main.scss" }}
+    {{ $opts := dict
+      "transpiler" "dartsass"
+      "targetPath" "css/style.css"
+    }}
+    {{ with . | toCSS $opts | minify | fingerprint }}
+      <link
+        rel="stylesheet"
+        href="{{ .RelPermalink }}"
+        integrity="{{ .Data.Integrity }}"
+        crossorigin="anonymous"
+      />
     {{ end }}
+  {{ end }}    
 
     <!-- jQuery from Google's CDN -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
