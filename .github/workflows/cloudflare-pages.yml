@@ -34,6 +34,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           submodules: recursive
 
       - name: Setup Hugo
@@ -41,6 +42,14 @@ jobs:
         with:
           hugo-version: "latest"
           extended: true
+
+      - name: Setup Node.js (for Sass)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Dart Sass
+        run: npm install -g sass
 
       - name: Build site
         run: hugo --gc --minify
