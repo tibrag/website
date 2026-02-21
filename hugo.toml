@@ -10,6 +10,8 @@ title = 'Scouting Tibrag Sneek'
     min = '0.134.2'
 
   [[module.imports]]
+    # In TEST: path = ../../content and disabled = true (for local tests - hugo server).
+    # In PRODUCTION: path = github.com/tibrag/content and disabled = false (for pushes to github).
     path = 'github.com/tibrag/content'
     #path = '../../content'
     disabled = false
