@@ -52,8 +52,8 @@ function throttle(func, limit) {
   };
 }
 
-const throttledBurgerState = throttle(burgerState, 100);
-window.addEventListener("resize", throttledBurgerState);
+// const throttledBurgerState = throttle(burgerState, 100);
+/// window.addEventListener("resize", throttledBurgerState);
 
 // darkmode persistent on page change
 const darkModeKey = "darkMode";
@@ -62,6 +62,7 @@ const toggle = document.getElementsByClassName("switch__input")[0];
 // On load: Apply mode based on localStorage
 if (localStorage.getItem(darkModeKey) === "enabled") {
   toggle.checked = true;
+  document.documentElement.dataset.darkmode = "enabled";
 }
 
 // Update mode on toggle

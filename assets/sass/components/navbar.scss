@@ -160,7 +160,7 @@
     width: 100%;
     display: grid;
     grid-column: 1 / -1;
-    background-color: var(--background);
+    //background-color: var(--background); // REMOVE this line when you see this
 
     // REMOVED min-height to fix issue #1
     margin: auto;

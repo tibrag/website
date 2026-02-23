@@ -12,7 +12,7 @@
   grid-template-rows: repeat(5, auto);
   gap: rem(8);
   border-radius: rem(8);
-  background-color: var(--text-color);
+  border: 2px solid darkslategray;
   padding: rem(20);
   max-width: 52ch;
 
