@@ -43,47 +43,41 @@
 
     <!-- SCSS (aka sass) object oriented css -->
     {{ with resources.Get "sass/main.scss" }}
-    {{ $opts := dict
-      "transpiler" "dartsass"
-      "targetPath" "css/style.css"
-    }}
-    {{ with . | toCSS $opts | minify | fingerprint }}
-      <link
-        rel="stylesheet"
-        href="{{ .RelPermalink }}"
-        integrity="{{ .Data.Integrity }}"
-        crossorigin="anonymous"
-      />
-    {{ end }}
-  {{ end }}    
+      {{ $opts := dict
+        "transpiler" "dartsass"
+        "targetPath" "css/style.css"
+      }}
+      {{ with . | toCSS $opts | minify | fingerprint }}
+        <link
+          rel="stylesheet"
+          href="{{ .RelPermalink }}"
+          integrity="{{ .Data.Integrity }}"
+          crossorigin="anonymous"
+        />
+      {{ end }}
+    {{ end }}    
 
     <!-- jQuery from Google's CDN -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <!-- JS -->
-    {{ with resources.Get "js/script.js" }} {{ if hugo.IsDevelopment }} {{ with
-    . | js.Build }}
-    <script defer src="{{ .RelPermalink }}"></script>
-    {{ end }} {{ else }} {{ $opts := dict "minify" true }} {{ with . | js.Build
-    $opts | fingerprint }}
-    <script
-      defer
-      src="{{ .RelPermalink }}"
-      integrity="{{ .Data.Integrity }}"
-      crossorigin="anonymous"
-    ></script>
-    {{ end }} {{ end }} {{ end }} {{ with resources.Get "js/navhover.js" }} {{
-    if hugo.IsDevelopment }} {{ with . | js.Build }}
-    <script defer src="{{ .RelPermalink }}"></script>
-    {{ end }} {{ else }} {{ $opts := dict "minify" true }} {{ with . | js.Build
-    $opts | fingerprint }}
-    <script
-      defer
-      src="{{ .RelPermalink }}"
-      integrity="{{ .Data.Integrity }}"
-      crossorigin="anonymous"
-    ></script>
-    {{ end }} {{ end }} {{ end }}
+    {{ $jsFiles := slice "js/script.js" "js/navhover.js" }}
+    {{ $scripts := slice }}
+    {{ range $jsFiles }}
+      {{ with resources.Get . }}
+        {{ $scripts = $scripts | append . }}
+      {{ end }}
+    {{ end }}
+
+    {{ $bundle := $scripts | resources.Concat "js/main.js" | js.Build }}
+
+    {{ if hugo.IsDevelopment }}
+      <script defer src="{{ $bundle.RelPermalink }}"></script>
+    {{ else }}
+      {{ with $bundle | minify | fingerprint }}
+        <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+      {{ end }}
+    {{ end }}
 
     <!-- is dit nodig? -->
     {{ with .OutputFormats.Get "rss" -}} {{ printf `
