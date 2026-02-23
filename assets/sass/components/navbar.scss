@@ -160,7 +160,7 @@
     width: 100%;
     display: grid;
     grid-column: 1 / -1;
-    //background-color: var(--background); // REMOVE this line when you see this
+    background-color: var(--background);
 
     // REMOVED min-height to fix issue #1
     margin: auto;
@@ -189,6 +189,7 @@
 
     // Desktop: always visible
     @include breakpoint(medium) {
+      background-color: transparent;
       grid-column: 2 !important;
       grid-row: 1 / -1;
       max-height: none;
