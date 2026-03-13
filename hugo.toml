@@ -19,26 +19,26 @@ disable = true
 
 [menus]
 [[menus.main]]
-name = 'De vereniging'
+name = 'De Vereniging'
 pageRef = '/vereniging'
 weight = 10
 
 [[menus.main]]
 name = 'Wat is scouting?'
 pageRef = '/vereniging/scouting'
-parent = 'De vereniging'
+parent = 'De Vereniging'
 weight = 11
 
 [[menus.main]]
 name = 'Wat is TIBRAG?'
 pageRef = '/vereniging/tibrag'
-parent = 'De vereniging'
+parent = 'De Vereniging'
 weight = 12
 
 [[menus.main]]
 name = 'Speltakken'
 pageRef = '/vereniging/speltakken'
-parent = 'De vereniging'
+parent = 'De Vereniging'
 weight = 13
 
 [[menus.main]]
