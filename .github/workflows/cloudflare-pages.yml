@@ -90,7 +90,7 @@ jobs:
         run: hugo build --gc --minify
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3.15.0
+        uses: cloudflare/wrangler-action@v4.0.0
         with:
           apiToken: ${{ env.CF_API_TOKEN }}
           accountId: ${{ env.CF_ACCOUNT_ID }}
